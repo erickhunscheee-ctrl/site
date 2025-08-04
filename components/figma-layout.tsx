@@ -8,11 +8,8 @@ export function FigmaLayout() {
   return (
     <div className="relative w-full min-h-screen bg-black text-white overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute top-[200px] left-[100px] w-[1188px] h-[329px] bg-[rgba(242,201,76,0.5)] blur-[125px] pointer-events-none"></div>
-      <div
-        className="absolute top-[400px] right-[200px] w-[585.94px] h-[569.83px] bg-[rgba(242,201,76,0.5)] blur-[125px] pointer-events-none"
-        style={{ transform: "rotate(77.01deg)" }}
-      ></div>
+      <div className="absolute top-[800px] left-[150px] w-[1300px] h-[100px] bg-[rgba(242,201,76,0.5)] blur-[125px] pointer-events-none"></div>
+      
 
       {/* Header Navigation */}
       <header className="relative z-10 flex justify-center items-center pt-8 pb-4">
@@ -70,7 +67,7 @@ export function FigmaLayout() {
     alt="Futuristic Figure"
     width={800}
     height={800}
-    className="absolute left-[-300px] bottom-[-500px] object-contain"
+    className="absolute left-[-350px] bottom-[-450px] object-contain"
     priority
      />
     </div>
@@ -78,7 +75,7 @@ export function FigmaLayout() {
       </section>
 
       {/* Discover More Section */}
-      <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
+      <section className="relative z-10 px-72 py-16 max-w-[1920px] mx-auto">
         <h2 className="text-white text-[25.4px] font-normal leading-[40px] mb-8">Descubra mais sobre nós</h2>
 
         {/* Chat Container */}
