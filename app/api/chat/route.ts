@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     const { message, context } = await req.json()
 
-    // Verificar se a API key está disponível
     if (!process.env.GROQ_API_KEY) {
       console.error("GROQ_API_KEY não encontrada nas variáveis de ambiente")
       return Response.json({
@@ -27,10 +26,9 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Erro na API do chat:", error)
 
-    // Retornar uma resposta amigável em caso de erro
     return Response.json({
       message:
-        "Desculpe, não consegui processar sua pergunta no momento. Nossa equipe foi notificada e está trabalhando para resolver o problema. Enquanto isso, você pode tentar uma das perguntas sugeridas: 'Quem somos', 'Projetos' ou 'Serviços'.",
+        "Desculpe, não consegui processar sua pergunta no momento. Nossa equipe foi notificada e está trabalhando para resolver o problema.",
     })
   }
 }
