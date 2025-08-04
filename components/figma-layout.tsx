@@ -37,20 +37,32 @@ export function FigmaLayout() {
 
       {/* Hero Section */}
       <section className="relative z-10 flex items-center justify-between px-16 py-20 max-w-[1920px] mx-auto">
-        {/* Left Content */}
-        <div className="flex flex-col max-w-[600px]">
+        {/* Left Image */}
+        <div className="relative flex-shrink-0 w-full h-full">
+          <Image
+            src="/images/hero-figure.png"
+            alt="Futuristic Figure"
+            width={800}
+            height={800}
+            className="absolute left-[-350px] bottom-[-450px] object-contain"
+            priority
+          />
+        </div>
+
+        {/* Right Content */}
+        <div className="flex flex-col items-center justify-center max-w-[600px] ml-auto">
           {/* MOUND Logo */}
-          <div className="w-[589px] h-[120px] flex items-center justify-center mb-8">
+          <div className="w-full flex items-center justify-center mb-8">
             <h1 className="text-white text-8xl font-bold tracking-tight">MOUND</h1>
           </div>
 
           {/* Description */}
-          <p className="text-white text-[32px] font-normal leading-[39px] mb-12 max-w-[448px]">
+          <p className="text-white text-[32px] font-normal leading-[39px] mb-12 text-center max-w-[448px]">
             empresa de desenvolvimento de software, com soluções para todas as áreas envolvidas.
           </p>
 
           {/* Buttons */}
-          <div className="flex gap-6">
+          <div className="flex gap-6 justify-center">
             <button className="flex justify-center items-center w-[271px] h-[77px] bg-[#262A2C] rounded-[30px] hover:bg-[#2a2e30] transition-colors">
               <span className="text-white text-[25.4px] font-normal leading-[40px]">SAIBA MAIS</span>
             </button>
@@ -59,19 +71,6 @@ export function FigmaLayout() {
             </button>
           </div>
         </div>
-
-        {/* Right Image */}
-        <div className="relative flex-shrink-0 w-full h-full">
-    <Image
-    src="/images/hero-figure.png"
-    alt="Futuristic Figure"
-    width={800}
-    height={800}
-    className="absolute left-[-350px] bottom-[-450px] object-contain"
-    priority
-     />
-    </div>
-
       </section>
 
       {/* Discover More Section */}
@@ -119,8 +118,7 @@ export function FigmaLayout() {
       </section>
 
       {/* Footer */}
-    <footer className="relative z-10 w-full h-[202px] bg-[#08090A] flex items-center justify-center">
-
+      <footer className="relative z-10 w-full h-[202px] bg-[#08090A] flex items-center justify-center">
         <p className="text-white text-[16px] font-normal leading-[40px]">Uma criação MOUND © 2025</p>
       </footer>
     </div>
