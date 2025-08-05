@@ -1,254 +1,187 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useRef, useEffect } from "react"
-import { Send } from "lucide-react"
+import { useState, useRef, useEffect } from 'react'
+import { Send, Bot } from 'lucide-react'
 
 interface Message {
   id: string
   content: string
-  isUser: boolean
+  sender: 'user' | 'assistant'
   timestamp: Date
 }
 
-const FIXED_RESPONSES = {
-  "quem somos": {
-    content: `Somos a **MOUND** - uma empresa especializada em desenvolvimento de software com soluções para todas as áreas envolvidas.
-
-Nossa missão é criar tecnologia sob medida para cada necessidade, oferecendo:
-
-• **Desenvolvimento de software personalizado**
-• **Soluções web e mobile**  
-• **Integração de sistemas**
-• **Consultoria tecnológica**
-
-Combinamos expertise técnica com visão estratégica para entregar soluções que realmente fazem a diferença no dia a dia das empresas.`,
-    keywords: ["quem somos", "sobre", "empresa", "equipe", "missão", "mound"],
-  },
-  projetos: {
-    content: `Nossos principais serviços de desenvolvimento:
-
-**💻 Desenvolvimento Web**
-Aplicações web modernas, responsivas e escaláveis usando as mais recentes tecnologias.
-
-**📱 Aplicações Mobile**
-Apps nativos e híbridos para iOS e Android com foco na experiência do usuário.
-
-**🔗 Integração de Sistemas**
-Conectamos diferentes plataformas e sistemas para otimizar processos empresariais.
-
-**🤖 Automação e IA**
-Implementação de soluções inteligentes para automatizar tarefas e processos.
-
-Cada projeto é desenvolvido com tecnologias de ponta e foco total na qualidade e performance.`,
-    keywords: ["projetos", "portfolio", "trabalhos", "cases", "projeto", "serviços", "servicos"],
-  },
+const fixedResponses = {
+  "quem somos": "Somos a MOUND, uma empresa de desenvolvimento de software focada em criar soluções inovadoras para todas as áreas. Nossa equipe é especializada em desenvolvimento web, mobile e soluções personalizadas.",
+  "projetos": "Desenvolvemos uma variedade de projetos incluindo sites corporativos, aplicações web complexas, aplicativos móveis nativos e híbridos, e sistemas personalizados para diferentes setores.",
+  "serviços": "Oferecemos desenvolvimento web moderno, criação de aplicativos móveis para iOS e Android, e soluções de software personalizadas para atender às necessidades específicas do seu negócio."
 }
 
 export function MoundChat() {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [inputValue, setInputValue] = useState("")
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      content: 'Olá! Sou o assistente da MOUND. Como posso ajudá-lo hoje?',
+      sender: 'assistant',
+      timestamp: new Date()
+    }
+  ])
+  const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
   useEffect(() => {
     scrollToBottom()
   }, [messages])
 
-  const findFixedResponse = (query: string): string | null => {
-    const normalizedQuery = query.toLowerCase().trim()
-    for (const [key, response] of Object.entries(FIXED_RESPONSES)) {
-      if (response.keywords.some((keyword) => normalizedQuery.includes(keyword))) {
-        return response.content
-      }
-    }
-    return null
-  }
-
-  const sendMessage = async (messageText: string) => {
-    if (!messageText.trim()) return
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: messageText,
-      isUser: true,
-      timestamp: new Date(),
+      content: input.trim(),
+      sender: 'user',
+      timestamp: new Date()
     }
 
-    setMessages((prev) => [...prev, userMessage])
-    setInputValue("")
+    setMessages(prev => [...prev, userMessage])
+    setInput('')
     setIsLoading(true)
-    setHasError(false)
 
     try {
-      const fixedResponse = findFixedResponse(messageText)
+      // Check for fixed responses first
+      const lowerInput = input.toLowerCase().trim()
+      const fixedResponse = Object.entries(fixedResponses).find(([key]) => 
+        lowerInput.includes(key)
+      )
 
       if (fixedResponse) {
-        await new Promise((resolve) => setTimeout(resolve, 800))
-
-        const botMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          content: fixedResponse,
-          isUser: false,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botMessage])
-      } else {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: messageText,
-            context:
-              "Você é um assistente da empresa 'MOUND', especializada em desenvolvimento de software com soluções para todas as áreas envolvidas. Responda de forma profissional e útil, sempre relacionando com nossos serviços quando apropriado. Mantenha as respostas concisas e informativas em português brasileiro.",
-          }),
-        })
-
-        if (!response.ok) {
-          throw new Error("Erro na resposta da API")
-        }
-
-        const data = await response.json()
-
-        const botMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          content: data.message || "Desculpe, não consegui processar sua pergunta no momento.",
-          isUser: false,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, botMessage])
+        setTimeout(() => {
+          const assistantMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            content: fixedResponse[1],
+            sender: 'assistant',
+            timestamp: new Date()
+          }
+          setMessages(prev => [...prev, assistantMessage])
+          setIsLoading(false)
+        }, 1000)
+        return
       }
+
+      // Use Groq API for other questions
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: input.trim() }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha na comunicação com o servidor')
+      }
+
+      const data = await response.json()
+      
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: data.message || 'Desculpe, não consegui processar sua mensagem.',
+        sender: 'assistant',
+        timestamp: new Date()
+      }
+
+      setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
-      console.error("Erro ao enviar mensagem:", error)
-      setHasError(true)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "Desculpe, ocorreu um erro ao processar sua mensagem. Verifique sua conexão e tente novamente",
-        isUser: false,
-        timestamp: new Date(),
+        content: 'Desculpe, ocorreu um erro ao processar sua mensagem. Verifique sua conexão e tente novamente.',
+        sender: 'assistant',
+        timestamp: new Date()
       }
-      setMessages((prev) => [...prev, errorMessage])
+      setMessages(prev => [...prev, errorMessage])
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (inputValue.trim() && !isLoading) {
-      sendMessage(inputValue)
-    }
-  }
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSubmit(e)
-    }
-  }
-
-  const formatMessage = (content: string) => {
-    return content.split("\n").map((line, index) => {
-      const formattedLine = line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\*(.*?)\*/g, "<em>$1</em>")
-
-      return (
-        <span key={index}>
-          <span dangerouslySetInnerHTML={{ __html: formattedLine }} />
-          {index < content.split("\n").length - 1 && <br />}
-        </span>
-      )
-    })
-  }
-
   return (
     <div className="flex flex-col h-full">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto mb-4 space-y-3 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
-        {messages.length === 0 && !hasError && (
-          <div className="flex items-center justify-center h-full text-gray-400 text-sm">
-            <p>Inicie uma conversa sobre a MOUND...</p>
-          </div>
-        )}
-
-        {messages.map((message) => (
-          <div key={message.id} className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pr-2">
+        <div className="space-y-4">
+          {messages.map((message) => (
             <div
-              className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                message.isUser
-                  ? "bg-[#4A5568] text-white"
-                  : message.content.includes("erro") || message.content.includes("Desculpe")
-                    ? "bg-[#2D3748] text-gray-300 border-l-4 border-red-500"
-                    : "bg-[#2D3748] text-gray-300"
-              }`}
+              key={message.id}
+              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className="leading-relaxed">{formatMessage(message.content)}</div>
-              <div className="text-xs text-gray-500 mt-1">
-                {message.timestamp.toLocaleTimeString("pt-BR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+              <div
+                className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  message.sender === 'user'
+                    ? 'bg-[#262A2C] text-white'
+                    : 'bg-[#1C1B1B] text-gray-100 border border-gray-700'
+                }`}
+              >
+                {message.sender === 'assistant' && (
+                  <div className="flex items-center gap-2 mb-1">
+                    <Bot className="w-4 h-4 text-yellow-500" />
+                    <span className="text-xs text-gray-400">MOUND Assistant</span>
+                  </div>
+                )}
+                <p className="text-sm leading-relaxed">{message.content}</p>
+                <span className="text-xs text-gray-500 mt-1 block">
+                  {message.timestamp.toLocaleTimeString('pt-BR', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                  })}
+                </span>
               </div>
             </div>
-          </div>
-        ))}
-
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-[#2D3748] text-gray-300 p-3 rounded-lg">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style={{ animationDelay: "0.1s" }}
-                ></div>
-                <div
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style={{ animationDelay: "0.2s" }}
-                ></div>
+          ))}
+          
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-[#1C1B1B] text-gray-100 border border-gray-700 rounded-lg px-4 py-2 max-w-[80%]">
+                <div className="flex items-center gap-2 mb-1">
+                  <Bot className="w-4 h-4 text-yellow-500" />
+                  <span className="text-xs text-gray-400">MOUND Assistant</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
       {/* Input Area */}
-      <form onSubmit={handleSubmit} className="flex items-center gap-2">
-        <div className="flex-1 relative">
+      <form onSubmit={handleSubmit} className="mt-4">
+        <div className="flex gap-2">
           <input
-            ref={inputRef}
             type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Digite sua mensagem sobre a MOUND..."
-            className="w-full px-4 py-3 bg-[#2D3748] text-white rounded-lg border border-gray-600 focus:border-yellow-500 focus:outline-none placeholder-gray-400 text-sm"
+            className="flex-1 bg-[#262A2C] text-white placeholder-gray-400 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
             disabled={isLoading}
           />
+          <button
+            type="submit"
+            disabled={!input.trim() || isLoading}
+            className="bg-yellow-500 hover:bg-yellow-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg px-4 py-2 transition-colors"
+          >
+            <Send className="w-4 h-4" />
+          </button>
         </div>
-        <button
-          type="submit"
-          disabled={!inputValue.trim() || isLoading}
-          className={`p-3 rounded-lg transition-colors ${
-            inputValue.trim() && !isLoading
-              ? "bg-yellow-500 hover:bg-yellow-600 text-black"
-              : "bg-gray-600 text-gray-400 cursor-not-allowed"
-          }`}
-        >
-          <Send className="w-4 h-4" />
-        </button>
       </form>
     </div>
   )
