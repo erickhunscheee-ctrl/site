@@ -2,7 +2,9 @@
 
 import Image from "next/image"
 import { MoundChat } from "@/components/mound-chat"
-import { Github, Zap, Network, Code, Smartphone, Globe, Linkedin, Heart } from 'lucide-react'
+import { WhatsAppIntegration } from "@/components/whatsapp-integration"
+import { PixIntegration } from "@/components/pix-integration"
+import { Github, Zap, Network, Code, Smartphone, Globe, Linkedin } from "lucide-react"
 
 export function FigmaLayout() {
   return (
@@ -128,47 +130,19 @@ export function FigmaLayout() {
         </div>
       </section>
 
-      {/* Why We Do This Section */}
+      {/* Integrations Demo Section */}
       <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="bg-[#151313] rounded-[20px] p-12 hover:bg-[#1a1818] transition-colors group text-center">
-            <div className="flex justify-center mb-8">
-              <div className="w-20 h-20 bg-[#262A2C] rounded-full flex items-center justify-center group-hover:bg-[#2a2e30] transition-colors">
-                <Heart className="w-10 h-10 text-white" />
-              </div>
-            </div>
-            
-            <h2 className="text-white text-2xl font-semibold mb-6">Nossa escolha</h2>
-            
-            <p className="text-gray-300 text-lg leading-relaxed mb-8">
-              Acreditamos que a tecnologia deve simplificar a vida das pessoas. 
-              Cada linha de código que escrevemos carrega nossa dedicação em 
-              transformar ideias complexas em soluções elegantes e funcionais.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="p-4">
-                <h4 className="text-white text-lg font-medium mb-2">Inovação</h4>
-                <p className="text-gray-400 text-sm">
-                  Sempre buscamos as melhores tecnologias para entregar resultados excepcionais.
-                </p>
-              </div>
-              
-              <div className="p-4">
-                <h4 className="text-white text-lg font-medium mb-2">Qualidade</h4>
-                <p className="text-gray-400 text-sm">
-                  Cada projeto é tratado com atenção aos detalhes e padrões de excelência.
-                </p>
-              </div>
-              
-              <div className="p-4">
-                <h4 className="text-white text-lg font-medium mb-2">Parceria</h4>
-                <p className="text-gray-400 text-sm">
-                  Trabalhamos lado a lado com nossos clientes para alcançar seus objetivos.
-                </p>
-              </div>
-            </div>
-          </div>
+        <h2 className="text-white text-2xl font-normal mb-8 text-center">Demonstrações de Integração</h2>
+        <p className="text-gray-300 text-lg text-center mb-12 max-w-[600px] mx-auto">
+          Experimente nossas integrações em tempo real e veja como podemos facilitar seus processos.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto">
+          {/* WhatsApp Integration Card */}
+          <WhatsAppIntegration />
+
+          {/* PIX Integration Card */}
+          <PixIntegration />
         </div>
       </section>
 
@@ -196,16 +170,22 @@ export function FigmaLayout() {
                 <Github className="w-4 h-4 text-white" />
               </div>
             </div>
-            <h3 className="text-white text-lg font-semibold mb-2">João Silva</h3>
+            <h3 className="text-white text-lg font-semibold mb-2">Daniel Hunsche</h3>
             <p className="text-gray-300 text-sm mb-3">Full Stack Developer</p>
             <p className="text-gray-400 text-xs max-w-[200px] leading-relaxed">
-              Especialista em React, Node.js e arquiteturas modernas. 5+ anos de experiência.
+              Em desenvolvimento.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors">
+              <a
+                href="#"
+                className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+              >
                 <Github className="w-4 h-4 text-white" />
               </a>
-              <a href="#" className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors">
+              <a
+                href="#"
+                className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+              >
                 <Linkedin className="w-4 h-4 text-white" />
               </a>
             </div>
@@ -227,16 +207,22 @@ export function FigmaLayout() {
                 <Code className="w-4 h-4 text-white" />
               </div>
             </div>
-            <h3 className="text-white text-lg font-semibold mb-2">Maria Santos</h3>
+            <h3 className="text-white text-lg font-semibold mb-2">Erick Hunsche</h3>
             <p className="text-gray-300 text-sm mb-3">Mobile Developer</p>
             <p className="text-gray-400 text-xs max-w-[200px] leading-relaxed">
-              Especialista em React Native e Flutter. Focada em UX/UI e performance mobile.
+              Em desenvolvimento.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors">
+              <a
+                href="#"
+                className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+              >
                 <Github className="w-4 h-4 text-white" />
               </a>
-              <a href="#" className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors">
+              <a
+                href="#"
+                className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+              >
                 <Linkedin className="w-4 h-4 text-white" />
               </a>
             </div>
