@@ -10,19 +10,37 @@ export function FigmaLayout() {
   return (
     <div className="relative w-full min-h-screen bg-black text-white overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute top-[800px] left-[150px] w-[1300px] h-[100px] bg-[rgba(242,201,76,0.5)] blur-[125px] pointer-events-none"></div>
+      <div className="absolute top-[800px] left-[100px] w-[1000px] h-[80px] bg-[rgba(99,98,97,0.5)] blur-[125px] pointer-events-none"></div>
 
       {/* Header Navigation */}
       <header className="relative z-10 flex justify-center items-center pt-8 pb-4">
-        <nav className="flex gap-16">
+        <nav className="flex items-center gap-16">
+          {/* Primeiros 2 links */}
           <a href="#" className="text-white text-lg font-normal hover:opacity-80 transition-opacity">
             home
           </a>
           <a href="#" className="text-white text-lg font-normal hover:opacity-80 transition-opacity">
             saiba mais
           </a>
+
+          {/* Logo centralizado */}
+          <div className="mx-8">
+            <Image
+              src="/images/logo.png"
+              alt="Futuristic Figure"
+              width={100}
+              height={100}
+              className="object-contain"
+              priority
+            />
+          </div>
+
+          {/* Últimos 2 links */}
           <a href="#" className="text-white text-lg font-normal hover:opacity-80 transition-opacity">
             desenvolvedores
+          </a>
+          <a href="#" className="text-white text-lg font-normal hover:opacity-80 transition-opacity">
+            teste
           </a>
         </nav>
       </header>
@@ -30,62 +48,59 @@ export function FigmaLayout() {
       {/* Hero Section */}
       <section className="relative z-10 flex items-center justify-center px-16 py-32 max-w-[1920px] mx-auto min-h-[80vh]">
         {/* Background Image */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute top-12 inset-0 flex items-center justify-center">
           <Image
-            src="/images/hero-figure.png"
+            src="/images/hero-section.png"
             alt="Futuristic Figure"
-            width={600}
-            height={600}
-            className="object-contain opacity-30"
+            width={1000}
+            height={300}
+            className="object-contain opacity-70"
             priority
           />
         </div>
 
-        {/* Centered Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px]">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px] -mt-96">
           {/* MOUND Logo */}
-          <div className="mb-8">
+          <div className="mb-6">
             <h1 className="text-white text-6xl font-bold tracking-tight">MOUND</h1>
           </div>
 
           {/* Description */}
-          <p className="text-white text-xl font-normal leading-relaxed mb-12 max-w-[600px]">
+          <p className="text-white text-xl font-normal leading-relaxed mb-8 max-w-[600px]">
             empresa de desenvolvimento de software, com soluções para todas as áreas envolvidas.
           </p>
 
-          {/* Buttons */}
-          <div className="flex gap-6 justify-center">
-            <button className="flex justify-center items-center px-8 py-4 bg-[#262A2C] rounded-[30px] hover:bg-[#2a2e30] transition-colors">
-              <span className="text-white text-lg font-normal">SAIBA MAIS</span>
-            </button>
-            <button className="flex justify-center items-center px-8 py-4 border border-[#262A2C] rounded-[30px] hover:bg-[#262A2C] transition-colors">
-              <span className="text-white text-lg font-normal">CONTATO</span>
-            </button>
-          </div>
+
+        {/* Buttons */}
+        <div className="flex gap-6 justify-center">
+          <button className="flex justify-center items-center px-12 py-3 bg-[#ffffff] rounded-[30px] hover:bg-[#ffffff] transition-colors">
+            <span className="text-[#262A2C] text-sm font-semibold">CURIOSIDADE</span>
+          </button>
         </div>
-      </section>
+    </div>
+      </section >
 
-      {/* Discover More Section */}
-      <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
-        <h2 className="text-white text-2xl font-normal mb-8 text-center">Descubra mais sobre nós</h2>
+    {/* Discover More Section */ }
+    < section className = "relative z-10 px-16 py-16 max-w-[1920px] mx-auto" >
+      <h2 className="text-white text-2x1 font-normal mb-8 text-center">Descubra mais sobre nós</h2>
 
-        {/* Chat Container */}
-        <div className="w-full max-w-[1277px] h-[321px] bg-[#151313] rounded-[20px] relative overflow-hidden mx-auto">
-          <div className="w-full h-[88px] bg-[#1C1B1B] rounded-t-[20px] flex items-center px-6">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <span className="text-white text-sm font-medium">MOUND Assistant</span>
-              <span className="text-green-400 text-xs">Conectado via GROQ</span>
-            </div>
-          </div>
-          <div className="p-6 h-[calc(321px-88px)] overflow-hidden">
-            <MoundChat />
-          </div>
-        </div>
-      </section>
+  {/* Chat Container */ }
+  <div className="w-full max-w-[1277px] h-[380px] bg-[#151313] rounded-[20px] relative overflow-hidden mx-auto">
+    <div className="w-full h-[88px] bg-[#1C1B1B] rounded-t-[20px] flex items-center px-6">
+      <div className="flex items-center gap-3">
+        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+        <span className="text-white text-sm font-medium">MOUND Assistant</span>
+        <span className="text-green-400 text-xs">Conectado via GROQ</span>
+      </div>
+    </div>
+    <div className="p-6 h-[calc(380px-88px)] overflow-hidden">
+      <MoundChat />
+    </div>
+  </div>
+      </section >
 
-      {/* Services Section */}
-      <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
+    {/* Services Section */ }
+    < section className = "relative z-10 px-16 py-16 max-w-[1920px] mx-auto" >
         <h2 className="text-white text-2xl font-normal mb-12 text-center">Nossos Serviços</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
@@ -128,10 +143,10 @@ export function FigmaLayout() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Integrations Demo Section */}
-      <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
+    {/* Integrations Demo Section */ }
+    < section className = "relative z-10 px-16 py-16 max-w-[1920px] mx-auto" >
         <h2 className="text-white text-2xl font-normal mb-8 text-center">Demonstrações de Integração</h2>
         <p className="text-gray-300 text-lg text-center mb-12 max-w-[600px] mx-auto">
           Experimente nossas integrações em tempo real e veja como podemos facilitar seus processos.
@@ -144,10 +159,10 @@ export function FigmaLayout() {
           {/* PIX Integration Card */}
           <PixIntegration />
         </div>
-      </section>
+      </section >
 
-      {/* Developers Section */}
-      <section className="relative z-10 px-16 py-16 max-w-[1920px] mx-auto">
+    {/* Developers Section */ }
+    < section className = "relative z-10 px-16 py-16 max-w-[1920px] mx-auto" >
         <h2 className="text-white text-2xl font-normal mb-8 text-center">Nossa Equipe</h2>
         <p className="text-gray-300 text-lg text-center mb-12 max-w-[600px] mx-auto">
           Conheça os desenvolvedores por trás da MOUND, profissionais dedicados em criar soluções inovadoras.
@@ -228,10 +243,10 @@ export function FigmaLayout() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Integrations Section */}
-      <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">
+    {/* Integrations Section */ }
+    < section className = "relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto" >
         <h2 className="text-white text-sm font-normal mb-8 text-center">Nossas integrações</h2>
 
         <div className="w-full h-[97px] bg-[#08090A] flex justify-center items-center gap-16 rounded-lg">
@@ -253,12 +268,12 @@ export function FigmaLayout() {
             <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">n8n</span>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Footer */}
-      <footer className="relative z-10 w-full h-[200] bg-[#08090A] flex items-center justify-center">
-        <p className="text-white text-sm font-normal">Uma criação MOUND © 2025</p>
-      </footer>
-    </div>
+    {/* Footer */ }
+    < footer className = "relative z-10 w-full h-[200] bg-[#08090A] flex items-center justify-center" >
+      <p className="text-white text-sm font-normal">Uma criação MOUND © 2025</p>
+      </footer >
+    </div >
   )
 }
