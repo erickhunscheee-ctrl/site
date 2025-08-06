@@ -133,7 +133,7 @@ export function FigmaLayout() {
           <div className="w-full h-[60px] md:h-[88px] bg-[#1C1B1B] rounded-t-[15px] md:rounded-t-[20px] flex items-center px-4 md:px-6">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="w-2 md:w-3 h-2 md:h-3 bg-yellow-500 rounded-full"></div>
-              <span className="text-white text-xs md:text-sm font-medium">MOUND Assistant</span>
+              <span className="text-white text-xs md:text-sm font-medium">MOUND Assistente</span>
               <span className="text-green-400 text-xs hidden sm:block">Conectado via GROQ</span>
             </div>
           </div>
