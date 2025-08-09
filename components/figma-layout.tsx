@@ -318,7 +318,7 @@ export function FigmaLayout() {
           {/* n8n */}
           <div className="flex flex-col items-center group cursor-pointer">
             <Network className="w-8 h-8 text-white mb-2 group-hover:text-gray-300 transition-colors" />
-            <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">neon</span>
+            <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">teste</span>
           </div>
         </div>
       </section >
