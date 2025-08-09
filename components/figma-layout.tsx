@@ -294,26 +294,31 @@ export function FigmaLayout() {
       </section>
 
       {/* Integrations Section */}
-      < section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto" >
+      < section className="relative z-10 pt-16 pb-0 max-w-full mx-auto" >
         <h2 className="text-white text-sm font-normal mb-8 text-center">Nossas integrações</h2>
 
         <div className="w-full h-[97px] bg-[#08090A] flex justify-center items-center gap-16 rounded-lg">
           {/* GitHub */}
           <div className="flex flex-col items-center group cursor-pointer">
-            <Github className="w-12 h-12 text-white group-hover:text-gray-300 transition-colors" />
+            <Github className="w-8 h-8 text-white group-hover:text-gray-300 transition-colors" />
             <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">GitHub</span>
           </div>
 
           {/* Groq */}
           <div className="flex flex-col items-center group cursor-pointer">
-            <Zap className="w-12 h-12 text-white mb-2 group-hover:text-gray-300 transition-colors" />
-            <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">Groq</span>
+            <Zap className="w-8 h-8 text-white mb-2 group-hover:text-gray-300 transition-colors" />
+            <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">Supabase</span>
           </div>
 
           {/* n8n */}
           <div className="flex flex-col items-center group cursor-pointer">
-            <Network className="w-12 h-12 text-white mb-2 group-hover:text-gray-300 transition-colors" />
+            <Network className="w-8 h-8 text-white mb-2 group-hover:text-gray-300 transition-colors" />
             <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">n8n</span>
+          </div>
+          {/* n8n */}
+          <div className="flex flex-col items-center group cursor-pointer">
+            <Network className="w-8 h-8 text-white mb-2 group-hover:text-gray-300 transition-colors" />
+            <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">neon</span>
           </div>
         </div>
       </section >
