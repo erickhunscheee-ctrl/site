@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ExternalLink, Newspaper, ChevronLeft, ChevronRight } from "lucide-react"
+import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 
 type NewsItem = {
   id: string
@@ -9,6 +9,7 @@ type NewsItem = {
   url: string | null
   source: string
   createdAt: string
+  image?: string | null
 }
 
 type ApiData = {
@@ -28,6 +29,7 @@ export function NewsFeed() {
     setLoading(true)
     setError(null)
     try {
+      // Mantém translate=1 para PT-BR; hitsPerPage=4 é definido no backend
       const res = await fetch(`/api/news?page=${pageToLoad}&translate=1`, { cache: "no-store" })
       if (!res.ok) throw new Error("Falha ao carregar notícias")
       const data = (await res.json()) as ApiData
@@ -65,17 +67,16 @@ export function NewsFeed() {
         Manchetes atualizadas em tempo real, traduzidas para PT-BR.
       </p>
 
-      {/* List layout, aligned with chat style */}
       <div className="max-w-[1000px] mx-auto">
         {loading ? (
           <ul className="space-y-3">
-            {Array.from({ length: 6 }).map((_, i) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <li key={i} className="bg-[#151313] border border-[#262A2C] rounded-[15px] p-4 md:p-5 animate-pulse">
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 bg-[#262A2C] rounded-full" />
+                  <div className="w-14 h-14 bg-[#262A2C] rounded-md" />
                   <div className="flex-1 space-y-2">
                     <div className="h-4 bg-[#262A2C] rounded w-3/4" />
-                    <div className="h-4 bg-[#262A2C] rounded w-1/4" />
+                    <div className="h-4 bg-[#262A2C] rounded w-1/3" />
                   </div>
                 </div>
               </li>
@@ -93,10 +94,26 @@ export function NewsFeed() {
                 className="bg-[#151313] border border-[#262A2C] rounded-[15px] p-4 md:p-5 hover:bg-[#1a1818] transition-colors"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 bg-[#262A2C] rounded-full flex items-center justify-center flex-shrink-0">
-                    <Newspaper className="w-5 h-5 text-white" />
+                  <div className="w-14 h-14 rounded-md overflow-hidden border border-[#262A2C] bg-[#0f0f0f] flex-shrink-0">
+                    {n.image ? (
+                      <img
+                        src={n.image || "/placeholder.svg"}
+                        alt="Imagem da notícia"
+                        className="w-full h-full object-cover"
+                        crossOrigin="anonymous"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <img
+                        src="/placeholder.svg?height=56&width=56"
+                        alt="Prévia da notícia"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
-                  <div className="flex-1">
+
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-white text-sm md:text-base font-medium leading-relaxed">{n.title}</h3>
                     <div className="text-xs text-gray-400 mt-1">
                       <span className="uppercase tracking-wide">{n.source}</span>
@@ -124,7 +141,6 @@ export function NewsFeed() {
           </ul>
         )}
 
-        {/* Pagination controls */}
         <div className="flex items-center justify-center gap-4 mt-6">
           <button
             onClick={() => load(page - 1)}

@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useCallback, useRef, useState } from "react"
 import Image from "next/image"
 import { MoundChat } from "@/components/mound-chat"
@@ -26,13 +25,12 @@ export function FigmaLayout() {
     {
       icon: Smartphone,
       title: "Desenvolvimento Mobile",
-      description:
-        "Desenvolvemos aplicativos nativos e híbridos para iOS e Android com foco na experiência do usuário.",
+      description: "Desenvolvemos apps nativos e híbridos para iOS e Android com foco em UX.",
     },
     {
       icon: Code,
       title: "Soluções Personalizadas",
-      description: "Desenvolvemos sistemas sob medida para atender às necessidades específicas do seu negócio.",
+      description: "Sistemas sob medida para necessidades específicas do seu negócio.",
     },
   ]
 
@@ -55,15 +53,15 @@ export function FigmaLayout() {
 
   // Section refs for smooth scroll
   const homeRef = useRef<HTMLElement | null>(null)
-  const saibaMaisRef = useRef<HTMLElement | null>(null)
+  const sobreRef = useRef<HTMLDivElement | null>(null)
   const demosRef = useRef<HTMLElement | null>(null)
   const devsRef = useRef<HTMLElement | null>(null)
+  const noticiasRef = useRef<HTMLElement | null>(null)
 
-  const scrollTo = useCallback((ref: React.RefObject<HTMLElement | null>) => {
+  const scrollTo = useCallback((ref: React.RefObject<HTMLElement | HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }, [])
 
-  // Helper wrapper class to align cards in the site like the chat container
   const sectionMax = "max-w-[1000px] mx-auto"
 
   return (
@@ -85,14 +83,14 @@ export function FigmaLayout() {
             home
           </a>
           <a
-            href="#saiba-mais"
+            href="#sobre-nos"
             onClick={(e) => {
               e.preventDefault()
-              scrollTo(saibaMaisRef)
+              scrollTo(sobreRef)
             }}
             className="text-white font-normal hover:opacity-80 transition-opacity hidden sm:block"
           >
-            saiba mais
+            sobre nós
           </a>
 
           {/* Logo centralizado */}
@@ -137,7 +135,6 @@ export function FigmaLayout() {
         className="relative z-10 flex items-center justify-center px-4 md:px-16 py-28 md:py-32 max-w-[1920px] mx-auto min-h-[70vh]"
         aria-labelledby="hero-title"
       >
-        {/* Background Image */}
         <div className="absolute top-12 inset-0 flex items-center justify-center">
           <Image
             src="/images/hero-section.png"
@@ -199,15 +196,7 @@ export function FigmaLayout() {
         </div>
       </section>
 
-      {/* Daily News Section (API) - List layout */}
-      <NewsFeed />
-
-      {/* Learn More Section (single card) right below news */}
-      <div ref={saibaMaisRef}>
-        <LearnMoreSection />
-      </div>
-
-      {/* Services Section with Pagination */}
+      {/* Serviços */}
       <section
         id="servicos"
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
@@ -218,18 +207,17 @@ export function FigmaLayout() {
         </h2>
 
         <div className={`${sectionMax}`}>
-          {/* Desktop View */}
+          {/* Desktop */}
           <div className="hidden md:grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <ServiceCard key={index} service={service} />
             ))}
           </div>
 
-          {/* Mobile View with Pagination */}
+          {/* Mobile com paginação */}
           <div className="block md:hidden">
             <div className="relative">
               <ServiceCard service={services[currentServicePage]} />
-
               <div className="flex justify-center items-center mt-6 gap-4">
                 <button
                   onClick={() => setCurrentServicePage((prev) => (prev > 0 ? prev - 1 : services.length - 1))}
@@ -238,7 +226,6 @@ export function FigmaLayout() {
                 >
                   <ChevronLeft className="w-5 h-5 text-white" />
                 </button>
-
                 <div className="flex gap-2" aria-hidden>
                   {services.map((_, index) => (
                     <div
@@ -247,7 +234,6 @@ export function FigmaLayout() {
                     />
                   ))}
                 </div>
-
                 <button
                   onClick={() => setCurrentServicePage((prev) => (prev < services.length - 1 ? prev + 1 : 0))}
                   className="w-10 h-10 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
@@ -261,7 +247,7 @@ export function FigmaLayout() {
         </div>
       </section>
 
-      {/* Integrations Demo Section with Pagination */}
+      {/* Demonstrações de Integração (Stripe restaurado) */}
       <section
         id="integracoes"
         ref={demosRef}
@@ -276,14 +262,14 @@ export function FigmaLayout() {
         </p>
 
         <div className={`${sectionMax}`}>
-          {/* Desktop View */}
+          {/* Desktop: exatamente como antes (3 cards) */}
           <div className="hidden md:grid md:grid-cols-3 gap-8">
             <WhatsAppIntegration />
             <PixIntegration />
             <StripeIntegration />
           </div>
 
-          {/* Mobile View with Pagination (3 cards) */}
+          {/* Mobile: 3 páginas (WhatsApp, Pix, Stripe) */}
           <div className="block md:hidden">
             <div className="relative">
               {currentIntegrationPage === 0 ? (
@@ -325,7 +311,7 @@ export function FigmaLayout() {
         </div>
       </section>
 
-      {/* Developers Section with Pagination */}
+      {/* Desenvolvedores (sem fundo nos cards) */}
       <section
         id="desenvolvedores"
         ref={devsRef}
@@ -339,51 +325,24 @@ export function FigmaLayout() {
           Conheça os desenvolvedores por trás da MOUND, profissionais dedicados em criar soluções inovadoras.
         </p>
 
-        <div className={`${sectionMax}`}>
-          {/* Desktop View */}
-          <div className="hidden md:flex justify-center gap-8">
-            {team.map((member, index) => (
-              <TeamMember key={index} member={member} />
-            ))}
-          </div>
-
-          {/* Mobile View with Pagination */}
-          <div className="block md:hidden">
-            <div className="relative flex justify-center">
-              <TeamMember member={team[currentTeamPage]} />
-
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
-                <button
-                  onClick={() => setCurrentTeamPage((prev) => (prev === 0 ? 1 : 0))}
-                  className="w-10 h-10 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
-                  aria-label="Anterior"
-                >
-                  <ChevronLeft className="w-5 h-5 text-white" />
-                </button>
-
-                <div className="flex gap-2" aria-hidden>
-                  {[0, 1].map((i) => (
-                    <div
-                      key={i}
-                      className={`w-2 h-2 rounded-full ${i === currentTeamPage ? "bg-white" : "bg-gray-600"}`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => setCurrentTeamPage((prev) => (prev === 0 ? 1 : 0))}
-                  className="w-10 h-10 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
-                  aria-label="Próximo"
-                >
-                  <ChevronRight className="w-5 h-5 text-white" />
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className={`${sectionMax} flex justify-center gap-16 flex-wrap`}>
+          {team.map((member, index) => (
+            <TeamMember key={index} member={member} />
+          ))}
         </div>
       </section>
 
-      {/* Integrations Icons Strip */}
+      {/* Sobre nós (logo após desenvolvedores) */}
+      <div ref={sobreRef}>
+        <LearnMoreSection />
+      </div>
+
+      {/* Notícias (final da página antes da faixa de integrações) */}
+      <section ref={noticiasRef}>
+        <NewsFeed />
+      </section>
+
+      {/* Faixa de integrações (logos) */}
       <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">
         <h2 className="text-white text-sm font-normal mb-8 text-center">Nossas integrações</h2>
 
@@ -413,7 +372,7 @@ export function FigmaLayout() {
   )
 }
 
-// Service Card Component
+// Service Card
 function ServiceCard({ service }: { service: any }) {
   const IconComponent = service.icon
   return (
@@ -429,43 +388,41 @@ function ServiceCard({ service }: { service: any }) {
   )
 }
 
-// Team Member Component
+// Team Member (sem fundo)
 function TeamMember({ member }: { member: any }) {
   const IconComponent = member.icon
   return (
-    <div className="bg-[#151313] border border-[#262A2C] rounded-[15px] p-6 md:p-8 hover:bg-[#1a1818] transition-colors group w-full max-w-[360px]">
-      <div className="flex flex-col items-center text-center">
-        <div className="relative mb-4 md:mb-6">
-          <div className="w-24 md:w-32 h-24 md:h-32 bg-[#262A2C] rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-300">
-            <Image
-              src={member.avatar || "/placeholder.svg?height=128&width=128&query=foto%20do%20desenvolvedor"}
-              alt={member.name}
-              width={128}
-              height={128}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-1 md:-bottom-2 -right-1 md:-right-2 w-6 md:w-8 h-6 md:h-8 bg-[#151313] rounded-full flex items-center justify-center border-2 border-[#262A2C]">
-            <IconComponent className="w-3 md:w-4 h-3 md:h-4 text-white" />
-          </div>
+    <div className="flex flex-col items-center text-center group">
+      <div className="relative mb-6">
+        <div className="w-32 h-32 bg-[#262A2C] rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src={member.avatar || "/placeholder-user.jpg"}
+            alt={member.name}
+            width={128}
+            height={128}
+            className="w-full h-full object-cover"
+          />
         </div>
-        <h3 className="text-white text-base md:text-lg font-semibold mb-1 md:mb-2">{member.name}</h3>
-        <p className="text-gray-300 text-sm mb-2 md:mb-3">{member.role}</p>
-        <p className="text-gray-400 text-xs max-w-[260px] leading-relaxed mb-3">{member.description}</p>
-        <div className="flex gap-3 mt-2 md:mt-4">
-          <a
-            href="#"
-            className="w-6 md:w-8 h-6 md:h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
-          >
-            <Github className="w-3 md:w-4 h-3 md:h-4 text-white" />
-          </a>
-          <a
-            href="#"
-            className="w-6 md:w-8 h-6 md:h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
-          >
-            <Linkedin className="w-3 md:w-4 h-3 md:h-4 text-white" />
-          </a>
+        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-[#151313] rounded-full flex items-center justify-center border-2 border-[#262A2C]">
+          <IconComponent className="w-4 h-4 text-white" />
         </div>
+      </div>
+      <h3 className="text-white text-lg font-semibold mb-2">{member.name}</h3>
+      <p className="text-gray-300 text-sm mb-3">{member.role}</p>
+      <p className="text-gray-400 text-xs max-w-[240px] leading-relaxed">{member.description}</p>
+      <div className="flex gap-3 mt-4">
+        <a
+          href="#"
+          className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+        >
+          <Github className="w-4 h-4 text-white" />
+        </a>
+        <a
+          href="#"
+          className="w-8 h-8 bg-[#262A2C] rounded-full flex items-center justify-center hover:bg-[#2a2e30] transition-colors"
+        >
+          <Linkedin className="w-4 h-4 text-white" />
+        </a>
       </div>
     </div>
   )
