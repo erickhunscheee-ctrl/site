@@ -45,7 +45,7 @@ export function StripeIntegration() {
   }
 
   return (
-    <div className="bg-[#151313] border border-[#262A2C] rounded-[15px] md:rounded-[20px] p-6 md:p-8 hover:bg-[#1a1818] transition-colors">
+    <div className="bg-[#151313]  md:rounded-[20px] p-6 md:p-8 hover:bg-[#1a1818] transition-colors">
       <div className="flex flex-col items-center text-center">
         <div className="w-12 md:w-16 h-12 md:h-16 bg-[#262A2C] rounded-full flex items-center justify-center mb-4 md:mb-6">
           <CreditCard className="w-6 md:w-8 h-6 md:h-8 text-white" />
