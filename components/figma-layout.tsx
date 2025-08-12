@@ -9,6 +9,9 @@ import { PixIntegration } from "@/components/pix-integration"
 import { StripeIntegration } from "@/components/stripe-integration"
 import { LearnMoreSection } from "@/components/learn-more"
 import { NewsFeed } from "@/components/news-feed"
+import { AvaliacoesSection } from "@/components/avaliacoes-section"
+import { PortalEmpresa } from "@/components/portal-empresa"
+import { FootballSection } from "@/components/football-section"
 import { Github, Zap, Network, Code, Smartphone, Globe, Linkedin, ChevronLeft, ChevronRight } from "lucide-react"
 
 export function FigmaLayout() {
@@ -57,6 +60,9 @@ export function FigmaLayout() {
   const demosRef = useRef<HTMLElement | null>(null)
   const devsRef = useRef<HTMLElement | null>(null)
   const noticiasRef = useRef<HTMLElement | null>(null)
+  const avaliacoesRef = useRef<HTMLElement | null>(null)
+  const portalRef = useRef<HTMLElement | null>(null)
+  const futebolRef = useRef<HTMLElement | null>(null)
 
   const scrollTo = useCallback((ref: React.RefObject<HTMLElement | HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -148,7 +154,7 @@ export function FigmaLayout() {
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px] -mt-40 md:-mt-72">
           <div className="mb-4 md:mb-6">
-            <h1 id="hero-title" className="text-white text-xl md:text-3xl font-bold -tracking-wide leading-tight">
+            <h1 id="hero-title" className="text-white text-lg md:text-2xl font-normal -tracking-wide leading-tight">
               {"Conte-nos sua necessidade."}
               <br />
               {"Afinal, que sentido há em um mundo sem desafios?"}
@@ -176,7 +182,7 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="descubra-mais-title"
       >
-        <h2 id="descubra-mais-title" className="text-white text-xl md:text-2xl font-normal mb-6 md:mb-8 text-center">
+        <h2 id="descubra-mais-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
           Descubra mais sobre nós
         </h2>
 
@@ -196,13 +202,17 @@ export function FigmaLayout() {
         </div>
       </section>
 
+      <section ref={portalRef}>
+        <PortalEmpresa />
+      </section>
+
       {/* Serviços */}
       <section
         id="servicos"
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="servicos-title"
       >
-        <h2 id="servicos-title" className="text-white text-xl md:text-2xl font-normal mb-8 md:mb-12 text-center">
+        <h2 id="servicos-title" className="text-white text-lg md:text-xl font-normal mb-8 md:mb-12 text-center">
           Nossos Serviços
         </h2>
 
@@ -254,7 +264,7 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="integracoes-title"
       >
-        <h2 id="integracoes-title" className="text-white text-xl md:text-2xl font-normal mb-6 md:mb-8 text-center">
+        <h2 id="integracoes-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
           Demonstrações de Integração
         </h2>
         <p className="text-gray-300 text-sm md:text-lg text-center mb-8 md:mb-12 max-w-[600px] mx-auto px-4">
@@ -318,7 +328,7 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="devs-title"
       >
-        <h2 id="devs-title" className="text-white text-xl md:text-2xl font-normal mb-6 md:mb-8 text-center">
+        <h2 id="devs-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
           Nossa Equipe
         </h2>
         <p className="text-gray-300 text-sm md:text-lg text-center mb-8 md:mb-12 max-w-[600px] mx-auto px-4">
@@ -337,9 +347,21 @@ export function FigmaLayout() {
         <LearnMoreSection />
       </div>
 
-      {/* Notícias (final da página antes da faixa de integrações) */}
-      <section ref={noticiasRef}>
-        <NewsFeed />
+      <section ref={avaliacoesRef}>
+        <AvaliacoesSection />
+      </section>
+
+      <section className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto">
+        <h2 className="text-white text-lg md:text-xl font-normal mb-8 md:mb-12 text-center">Integrações com API's</h2>
+
+        <section ref={futebolRef}>
+          <FootballSection />
+        </section>
+
+        {/* Notícias (final da página antes da faixa de integrações) */}
+        <section ref={noticiasRef}>
+          <NewsFeed />
+        </section>
       </section>
 
       {/* Faixa de integrações (logos) */}
