@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { NewsFeed } from "@/components/news-feed"
 import { FootballSection } from "@/components/football-section"
+import { StreamingSection } from "@/components/streaming-section"
 
 export function ApiIntegrations() {
-  const [activeTab, setActiveTab] = useState<"noticias" | "futebol">("noticias")
+  const [activeTab, setActiveTab] = useState<"noticias" | "futebol" | "streaming">("noticias")
 
   return (
     <div className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto">
@@ -30,6 +31,16 @@ export function ApiIntegrations() {
           >
             Futebol
           </button>
+          <button
+            onClick={() => setActiveTab("streaming")}
+            className={`px-6 py-2 rounded-[12px] text-sm font-medium transition-all ${
+              activeTab === "streaming"
+                ? "bg-[#262A2C] text-white"
+                : "text-gray-400 hover:text-white hover:bg-[#1a1818]"
+            }`}
+          >
+            Streaming
+          </button>
         </div>
       </div>
 
@@ -37,6 +48,7 @@ export function ApiIntegrations() {
       <div className="transition-all duration-300">
         {activeTab === "noticias" && <NewsFeed />}
         {activeTab === "futebol" && <FootballSection maxRounds={2} />}
+        {activeTab === "streaming" && <StreamingSection />}
       </div>
     </div>
   )
