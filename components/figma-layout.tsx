@@ -8,53 +8,30 @@ import { WhatsAppIntegration } from "@/components/whatsapp-integration"
 import { PixIntegration } from "@/components/pix-integration"
 import { StripeIntegration } from "@/components/stripe-integration"
 import { LearnMoreSection } from "@/components/learn-more"
-import { NewsFeed } from "@/components/news-feed"
 import { AvaliacoesSection } from "@/components/avaliacoes-section"
 import { PortalEmpresa } from "@/components/portal-empresa"
-import { FootballSection } from "@/components/football-section"
-import { Github, Zap, Network, Code, Smartphone, Globe, Linkedin, ChevronLeft, ChevronRight } from "lucide-react"
+import { LoadingScreen } from "@/components/loading-screen"
+import { Github, Zap, Network, Code, Linkedin, ChevronLeft, ChevronRight } from "lucide-react"
+import { ApiIntegrations } from "@/components/api-integrations"
+
+const services = [
+  { title: "Service 1", description: "Description 1", icon: Github },
+  { title: "Service 2", description: "Description 2", icon: Zap },
+  { title: "Service 3", description: "Description 3", icon: Network },
+]
+
+const team = [
+  { name: "Member 1", role: "Role 1", description: "Description 1", icon: Github, avatar: "/images/member1.jpg" },
+  { name: "Member 2", role: "Role 2", description: "Description 2", icon: Linkedin, avatar: "/images/member2.jpg" },
+  { name: "Member 3", role: "Role 3", description: "Description 3", icon: Code, avatar: "/images/member3.jpg" },
+]
 
 export function FigmaLayout() {
+  const [isLoading, setIsLoading] = useState(true)
   const [currentServicePage, setCurrentServicePage] = useState(0)
   const [currentIntegrationPage, setCurrentIntegrationPage] = useState(0)
   const [currentTeamPage, setCurrentTeamPage] = useState(0)
 
-  const services = [
-    {
-      icon: Globe,
-      title: "Desenvolvimento Web",
-      description: "Criamos sites e aplicações web modernas, responsivas e otimizadas para performance.",
-    },
-    {
-      icon: Smartphone,
-      title: "Desenvolvimento Mobile",
-      description: "Desenvolvemos apps nativos e híbridos para iOS e Android com foco em UX.",
-    },
-    {
-      icon: Code,
-      title: "Soluções Personalizadas",
-      description: "Sistemas sob medida para necessidades específicas do seu negócio.",
-    },
-  ]
-
-  const team = [
-    {
-      name: "Daniel Hunsche",
-      role: "Full Stack Developer",
-      description: "Em desenvolvimento.",
-      avatar: "/placeholder-user.jpg",
-      icon: Github,
-    },
-    {
-      name: "Erick Hunsche",
-      role: "Mobile Developer",
-      description: "Em desenvolvimento.",
-      avatar: "/placeholder-user.jpg",
-      icon: Code,
-    },
-  ]
-
-  // Section refs for smooth scroll
   const homeRef = useRef<HTMLElement | null>(null)
   const sobreRef = useRef<HTMLDivElement | null>(null)
   const demosRef = useRef<HTMLElement | null>(null)
@@ -69,6 +46,14 @@ export function FigmaLayout() {
   }, [])
 
   const sectionMax = "max-w-[1000px] mx-auto"
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false)
+  }
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />
+  }
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white overflow-hidden">
@@ -351,18 +336,7 @@ export function FigmaLayout() {
         <AvaliacoesSection />
       </section>
 
-      <section className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto">
-        <h2 className="text-white text-lg md:text-xl font-normal mb-8 md:mb-12 text-center">Integrações com API's</h2>
-
-        <section ref={futebolRef}>
-          <FootballSection />
-        </section>
-
-        {/* Notícias (final da página antes da faixa de integrações) */}
-        <section ref={noticiasRef}>
-          <NewsFeed />
-        </section>
-      </section>
+      <ApiIntegrations />
 
       {/* Faixa de integrações (logos) */}
       <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">

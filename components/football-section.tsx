@@ -33,7 +33,11 @@ interface Pagination {
   hasPrev: boolean
 }
 
-export function FootballSection() {
+interface FootballSectionProps {
+  maxRounds?: number
+}
+
+export function FootballSection({ maxRounds }: FootballSectionProps) {
   const [matches, setMatches] = useState<Match[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -69,6 +73,7 @@ export function FootballSection() {
 
       if (searchTeam) params.append("team", searchTeam)
       if (selectedDate) params.append("date", selectedDate)
+      if (maxRounds) params.append("maxRounds", maxRounds.toString())
 
       const response = await fetch(`${currentLeague.endpoint}?${params}`)
       const data = await response.json()
@@ -92,7 +97,7 @@ export function FootballSection() {
   useEffect(() => {
     setCurrentPage(1)
     fetchMatches(1)
-  }, [selectedLeague, searchTeam, selectedDate])
+  }, [selectedLeague, searchTeam, selectedDate, maxRounds])
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage)
@@ -111,12 +116,16 @@ export function FootballSection() {
       className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
       aria-labelledby="futebol-title"
     >
-      <h2 id="futebol-title" className="text-white text-xl md:text-2xl font-normal mb-4 md:mb-6 text-center">
-        Resultados do Futebol
-      </h2>
-      <p className="text-gray-300 text-sm md:text-lg text-center mb-6 md:mb-10 max-w-[700px] mx-auto px-4">
-        Últimos resultados dos campeonatos em tempo real.
-      </p>
+      {!maxRounds && (
+        <>
+          <h2 id="futebol-title" className="text-white text-xl md:text-2xl font-normal mb-4 md:mb-6 text-center">
+            Resultados do Futebol
+          </h2>
+          <p className="text-gray-300 text-sm md:text-lg text-center mb-6 md:mb-10 max-w-[700px] mx-auto px-4">
+            Últimos resultados dos campeonatos em tempo real.
+          </p>
+        </>
+      )}
 
       <div className="max-w-[1000px] mx-auto">
         <div className="mb-6 space-y-4">
