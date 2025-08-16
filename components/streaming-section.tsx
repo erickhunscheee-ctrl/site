@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Star, Calendar } from "lucide-react"
+import { ChevronLeft, ChevronRight, Star, Calendar, Trophy } from "lucide-react"
 import { LoadingSpinner } from "@/components/loading-spinner"
 
 interface StreamingShow {
@@ -11,11 +11,12 @@ interface StreamingShow {
   releaseYear: number
   genres: Array<{ id: number; name: string }>
   rating: number
+  rank?: number // Adicionar ranking para Top 10
   imageSet: {
     verticalPoster: {
       w240: string
-      w360: string
-      w480: string
+      w360?: string
+      w480?: string
     }
   }
   streamingOptions: {
@@ -44,10 +45,9 @@ export function StreamingSection() {
   const [error, setError] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({
-    country: "br",
-    services: "netflix,prime,hbo,disney",
-    orderBy: "popularity",
-    type: "movie",
+    country: "us",
+    service: "netflix", // Mudado para service único
+    showType: "movie", // Mudado para showType
   })
 
   const itemsPerPage = 4
@@ -58,11 +58,12 @@ export function StreamingSection() {
 
     try {
       const params = new URLSearchParams({
-        ...filters,
-        page: page.toString(),
+        country: filters.country,
+        service: filters.service,
+        showType: filters.showType,
       })
 
-      console.log("[v0] Fetching streaming data with params:", params.toString())
+      console.log("[v0] Fetching top 10 streaming data with params:", params.toString())
 
       const response = await fetch(`/api/streaming?${params}`)
       const result = await response.json()
@@ -129,11 +130,17 @@ export function StreamingSection() {
 
   return (
     <div className="space-y-6">
-      {/* Filters */}
+      <div className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Trophy className="w-5 h-5 text-yellow-400" />
+          <h3 className="text-lg font-semibold text-white">Top 10 Mais Assistidos</h3>
+        </div>
+      </div>
+
       <div className="flex flex-wrap gap-4 justify-center">
         <select
-          value={filters.type}
-          onChange={(e) => handleFilterChange("type", e.target.value)}
+          value={filters.showType}
+          onChange={(e) => handleFilterChange("showType", e.target.value)}
           className="bg-[#151313] border border-[#262A2C] text-white px-3 py-2 rounded-lg text-sm"
         >
           <option value="movie">Filmes</option>
@@ -141,25 +148,24 @@ export function StreamingSection() {
         </select>
 
         <select
-          value={filters.orderBy}
-          onChange={(e) => handleFilterChange("orderBy", e.target.value)}
+          value={filters.service}
+          onChange={(e) => handleFilterChange("service", e.target.value)}
           className="bg-[#151313] border border-[#262A2C] text-white px-3 py-2 rounded-lg text-sm"
         >
-          <option value="popularity">Popularidade</option>
-          <option value="imdb_rating">Nota IMDB</option>
-          <option value="tmdb_rating">Nota TMDB</option>
-        </select>
-
-        <select
-          value={filters.services}
-          onChange={(e) => handleFilterChange("services", e.target.value)}
-          className="bg-[#151313] border border-[#262A2C] text-white px-3 py-2 rounded-lg text-sm"
-        >
-          <option value="netflix,prime,hbo,disney">Todos os Serviços</option>
           <option value="netflix">Netflix</option>
           <option value="prime">Prime Video</option>
           <option value="hbo">HBO Max</option>
           <option value="disney">Disney+</option>
+        </select>
+
+        <select
+          value={filters.country}
+          onChange={(e) => handleFilterChange("country", e.target.value)}
+          className="bg-[#151313] border border-[#262A2C] text-white px-3 py-2 rounded-lg text-sm"
+        >
+          <option value="us">Estados Unidos</option>
+          <option value="br">Brasil</option>
+          <option value="gb">Reino Unido</option>
         </select>
       </div>
 
@@ -174,6 +180,12 @@ export function StreamingSection() {
               className="bg-[#151313] border border-[#262A2C] rounded-[15px] p-4 hover:bg-[#1a1818] transition-colors"
             >
               <div className="flex gap-4">
+                {show.rank && (
+                  <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 bg-yellow-400 text-black font-bold text-sm rounded-full">
+                    {show.rank}
+                  </div>
+                )}
+
                 <div className="flex-shrink-0">
                   <img
                     src={
