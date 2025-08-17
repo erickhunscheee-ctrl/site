@@ -21,9 +21,8 @@ const services = [
 ]
 
 const team = [
-  { name: "Member 1", role: "Role 1", description: "Description 1", icon: Github, avatar: "/images/member1.jpg" },
-  { name: "Member 2", role: "Role 2", description: "Description 2", icon: Linkedin, avatar: "/images/member2.jpg" },
-  { name: "Member 3", role: "Role 3", description: "Description 3", icon: Code, avatar: "/images/member3.jpg" },
+  { name: "Daniel Hunsche", role: "Desenvolvedor",description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Github, avatar: "/images/daniel.jpg" },
+  { name: "Erick Hunsche", role: "Desenvolvedor",description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Linkedin, avatar: "/images/eu.jpg" },
 ]
 
 export function FigmaLayout() {
@@ -40,6 +39,9 @@ export function FigmaLayout() {
   const avaliacoesRef = useRef<HTMLElement | null>(null)
   const portalRef = useRef<HTMLElement | null>(null)
   const futebolRef = useRef<HTMLElement | null>(null)
+  const [navItemsVisible, setNavItemsVisible] = useState(false)
+  const [logoClicked, setLogoClicked] = useState(false)
+
 
   const scrollTo = useCallback((ref: React.RefObject<HTMLElement | HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -49,6 +51,11 @@ export function FigmaLayout() {
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
+  }
+
+  const toggleNavItems = () => {
+    setLogoClicked(true)
+    setNavItemsVisible(!navItemsVisible)
   }
 
   if (isLoading) {
@@ -63,56 +70,108 @@ export function FigmaLayout() {
       {/* Header Navigation */}
       <header className="relative z-10 flex justify-center items-center pt-4 md:pt-8 pb-2 md:pb-4 px-4">
         <nav className="flex items-center gap-4 md:gap-16 text-sm md:text-lg">
+          {/* Item Home - sempre visível no mobile */}
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault()
               scrollTo(homeRef)
             }}
-            className="text-white font-normal hover:opacity-80 transition-opacity"
+            className={`text-white font-normal hover:opacity-80 transition-all duration-500 ease-in-out transform ${navItemsVisible
+              ? 'opacity-100 translate-x-0 scale-100 sm:block'
+              : 'opacity-0 -translate-x-4 scale-95 hidden'
+              }`}
           >
             home
           </a>
+
+          {/* Item Sobre - com transição suave */}
           <a
             href="#sobre-nos"
             onClick={(e) => {
               e.preventDefault()
               scrollTo(sobreRef)
             }}
-            className="text-white font-normal hover:opacity-80 transition-opacity hidden sm:block"
+            className={`text-white font-normal hover:opacity-80 transition-all duration-500 ease-in-out transform ${navItemsVisible
+              ? 'opacity-100 translate-x-0 scale-100 sm:block'
+              : 'opacity-0 -translate-x-4 scale-95 hidden'
+              }`}
           >
             sobre nós
           </a>
 
           {/* Logo centralizado */}
-          <div className="mx-4 md:mx-8">
+          <button
+            onClick={toggleNavItems}
+            className="relative mx-4 md:mx-8 focus:outline-none group"
+          >
+         
+        
+            {/* Segundo anel para efeito duplo */}
+
+
             <Image
               src="/images/logo.png"
               alt="Logo MOUND"
               width={60}
               height={60}
-              className="md:w-[100px] md:h-[100px] object-contain"
+              className={`
+                relative z-10 md:w-[100px] md:h-[100px] object-contain
+                transform transition-all duration-500 ease-out
+                hover:scale-105 active:scale-95
+                filter brightness-110 contrast-105
+                ${logoClicked ? 'scale-110 rotate-12 brightness-125' : ''}
+                animate-[breathe_2s_ease-in-out_infinite]
+              `}
+              style={{
+                animation: 'breathe 2s ease-in-out infinite'
+              }}
               priority
             />
-          </div>
 
+            {/* Definição da animação customizada */}
+            <style jsx>{`
+              @keyframes breathe {
+                0%, 100% { 
+                  transform: scale(1);
+                }
+                50% { 
+                  transform: scale(1.1);
+                }
+              }
+            `}</style>
+
+            {/* Efeito de "respiração" no mobile */}
+            <div className="md:hidden absolute inset-0 bg-white/5 rounded-full animate-pulse [animation-duration:2.5s]"></div>
+          </button>
+
+
+          {/* Item Desenvolvedores - com transição suave */}
           <a
             href="#desenvolvedores"
             onClick={(e) => {
               e.preventDefault()
               scrollTo(devsRef)
             }}
-            className="text-white font-normal hover:opacity-80 transition-opacity hidden sm:block"
+            className={`text-white font-normal hover:opacity-80 transition-all duration-500 ease-in-out transform ${navItemsVisible
+              ? 'opacity-100 translate-x-0 scale-100 sm:block'
+              : 'opacity-0 translate-x-4 scale-95 hidden'
+              }`}
           >
             desenvolvedores
           </a>
+
+          {/* Item Curiosidade - sempre visível */}
           <a
             href="#integracoes"
             onClick={(e) => {
               e.preventDefault()
               scrollTo(demosRef)
             }}
-            className="text-white font-normal hover:opacity-80 transition-opacity"
+            className={`text-white font-normal hover:opacity-80 transition-all duration-500 ease-in-out transform ${navItemsVisible
+              ? 'opacity-100 translate-x-0 scale-100 sm:block'
+              : 'opacity-0 -translate-x-4 scale-95 hidden'
+              }`}
           >
             curiosidade
           </a>
@@ -123,7 +182,7 @@ export function FigmaLayout() {
       <section
         id="home"
         ref={homeRef}
-        className="relative z-10 flex items-center justify-center px-4 md:px-16 py-28 md:py-32 max-w-[1920px] mx-auto min-h-[70vh]"
+        className="relative z-10 flex items-center justify-center px-4 md:px-16 py-28 md:py-32 max-w-[1920px] mx-auto min-h-[100vh]"
         aria-labelledby="hero-title"
       >
         <div className="absolute top-12 inset-0 flex items-center justify-center">
