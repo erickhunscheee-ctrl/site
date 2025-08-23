@@ -74,16 +74,16 @@ export function PortalEmpresa() {
   }
 
   return (
-    <section className="py-20 px-4 bg-black">
+    <section className="py-20 px-4 ">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Portal da Empresa</h2>
-          <p className="text-gray-400 text-lg">Acompanhe o status do seu projeto e acesse documentos</p>
+          <h2 className="text-2xl md:text-2xl font-bold text-white mb-4">ACESSO AO PROJETO</h2>
+          <p className="text-gray-400 text-lg">Tenha acesso a documentação e andamento dos projetos</p>
         </div>
 
-        <Card className="bg-[#151313] border border-[#262A2C] mb-8 hover:bg-[#1a1818] transition-colors">
+        <Card className="bg-[#151313] border-0 border-l-4 border-[#ca1515] rounded-l-[20px] rounded-r-none md:rounded-r-none p-6 md:p-8 hover:border-l-[#cfc8c8] transition-colors group">
           <CardHeader>
-            <CardTitle className="text-white">Acesse seus dados</CardTitle>
+            <CardTitle className="text-sm text-white">ACESSO VIA TOCKEN</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex gap-4">
@@ -91,10 +91,11 @@ export function PortalEmpresa() {
                 placeholder="Digite seu token de acesso"
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
-                className="bg-gray-800 border-gray-700 text-white flex-1"
+                className="bg-transparent border-0"
               />
-              <Button onClick={handleBuscar} disabled={loading} className="bg-blue-600 hover:bg-blue-700">
+              <Button onClick={handleBuscar} disabled={loading} className="px-6 py-3 " >
                 {loading ? "Buscando..." : "Buscar"}
+                
               </Button>
             </div>
 

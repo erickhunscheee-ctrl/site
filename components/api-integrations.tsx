@@ -23,15 +23,16 @@ export function ApiIntegrations() {
           >
             Notícias
           </button>
-          <button
+          {/* <button
             onClick={() => setActiveTab("futebol")}
             className={`px-6 py-2 rounded-[12px] text-sm font-medium transition-all ${
               activeTab === "futebol" ? "bg-[#262A2C] text-white" : "text-gray-400 hover:text-white hover:bg-[#1a1818]"
             }`}
           >
-            Futebol
-          </button>
-          <button
+         
+         Futebol
+          </button> */}
+          {/* <button
             onClick={() => setActiveTab("streaming")}
             className={`px-6 py-2 rounded-[12px] text-sm font-medium transition-all ${
               activeTab === "streaming"
@@ -40,16 +41,17 @@ export function ApiIntegrations() {
             }`}
           >
             Streaming
-          </button>
+          </button> */}
         </div>
       </div>
 
       {/* Content */}
       <div className="transition-all duration-300">
         {activeTab === "noticias" && <NewsFeed />}
-        {activeTab === "futebol" && <FootballSection maxRounds={2} />}
+        {/* {activeTab === "futebol" && <FootballSection maxRounds={2} />}
         {activeTab === "streaming" && <StreamingSection />}
-      </div>
+      </div> */}
+    </div>
     </div>
   )
 }

@@ -13,16 +13,37 @@ import { PortalEmpresa } from "@/components/portal-empresa"
 import { LoadingScreen } from "@/components/loading-screen"
 import { Github, Zap, Network, Code, Linkedin, ChevronLeft, ChevronRight } from "lucide-react"
 import { ApiIntegrations } from "@/components/api-integrations"
+import automacaoIcon from "@/public/images/automacao.png"
+import devIcon from "@/public/images/programacao-da-web.png"
+import IntegracoesIcon from "@/public/images/computador.png"
 
 const services = [
-  { title: "Service 1", description: "Description 1", icon: Github },
-  { title: "Service 2", description: "Description 2", icon: Zap },
-  { title: "Service 3", description: "Description 3", icon: Network },
+  {
+    title: "Desenvolvimento",
+    description: "Sistemas sob medida como ERP’s, sites e controladores, criados para atender às necessidades específicas do seu negócio.",
+    icon: (props: any) => (
+      <Image src={devIcon} alt="Desenvolvimento" width={40} height={40} {...props} />
+    )
+  },
+  {
+    title: "Automação",
+    description: "Soluções inteligentes que otimizam tarefas e aumentam a eficiência no dia a dia da sua empresa.",
+    icon: (props: any) => (
+      <Image src={automacaoIcon} alt="Automação" width={40} height={40} {...props} />
+    )
+  },
+  {
+    title: "Integrações",
+    description: "Conectamos sistemas, plataformas e APIs para centralizar informações e melhorar seus processos.",
+    icon: (props: any) => (
+      <Image src={IntegracoesIcon} alt="Integraçoes" width={40} height={40} {...props} />
+    )
+  }
 ]
 
 const team = [
-  { name: "Daniel Hunsche", role: "Desenvolvedor",description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Github, avatar: "/images/daniel.jpg" },
-  { name: "Erick Hunsche", role: "Desenvolvedor",description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Linkedin, avatar: "/images/eu.jpg" },
+  { name: "Daniel Hunsche", role: "Desenvolvedor", description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Github, avatar: "/images/daniel.jpg" },
+  { name: "Erick Hunsche", role: "Desenvolvedor", description: "Estudante de Engenharia de Software\nAtuação em desenvolvimento fullstack com Next.js, TypeScript, Java, PHP e Progress. Familiaridade com Figma, pipelines de deploy (CI/CD) e soluções baseadas em Inteligência Artificial.", icon: Linkedin, avatar: "/images/eu.jpg" },
 ]
 
 export function FigmaLayout() {
@@ -105,8 +126,8 @@ export function FigmaLayout() {
             onClick={toggleNavItems}
             className="relative mx-4 md:mx-8 focus:outline-none group"
           >
-         
-        
+
+
             {/* Segundo anel para efeito duplo */}
 
 
@@ -198,7 +219,7 @@ export function FigmaLayout() {
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px] -mt-40 md:-mt-72">
           <div className="mb-4 md:mb-6">
-            <h1 id="hero-title" className="text-white text-lg md:text-2xl font-normal -tracking-wide leading-tight">
+            <h1 id="hero-title" className="text-white text-lg md:text-3xl font-normal -tracking-wide leading-tight">
               {"Conte-nos sua necessidade."}
               <br />
               {"Afinal, que sentido há em um mundo sem desafios?"}
@@ -256,8 +277,8 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="servicos-title"
       >
-        <h2 id="servicos-title" className="text-white text-lg md:text-xl font-normal mb-8 md:mb-12 text-center">
-          Nossos Serviços
+        <h2 id="servicos-title" className="text-white text-lg md:text-2xl font-bold mb-8 md:mb-12 text-center">
+           SERVIÇOS MOUND
         </h2>
 
         <div className={`${sectionMax}`}>
@@ -308,8 +329,8 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="integracoes-title"
       >
-        <h2 id="integracoes-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
-          Demonstrações de Integração
+        <h2 id="integracoes-title" className="text-white text-lg md:text-2xl font-bold mb-6 md:mb-8 text-center">
+          DEMONSTRAÇÕES DE INTEGRAÇÕES
         </h2>
         <p className="text-gray-300 text-sm md:text-lg text-center mb-8 md:mb-12 max-w-[600px] mx-auto px-4">
           Experimente nossas integrações em tempo real e veja como podemos facilitar seus processos.
@@ -372,10 +393,10 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="devs-title"
       >
-        <h2 id="devs-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
-          Nossa Equipe
+        <h2 id="devs-title" className="text-white text-lg md:text-2x1 font-bold mb-6 md:mb-8 text-center">
+          NOSSA EQUIPE
         </h2>
-        <p className="text-gray-300 text-sm md:text-lg text-center mb-8 md:mb-12 max-w-[600px] mx-auto px-4">
+        <p className="text-gray-300 text-sm md:text-sm text-center mb-8 md:mb-12 max-w-[600px] mx-auto px-4">
           Conheça os desenvolvedores por trás da MOUND, profissionais dedicados em criar soluções inovadoras.
         </p>
 
@@ -429,12 +450,14 @@ export function FigmaLayout() {
 
 // Service Card
 function ServiceCard({ service }: { service: any }) {
+  
   const IconComponent = service.icon
   return (
-    <div className="bg-[#151313] border border-[#262A2C] rounded-[15px] md:rounded-[20px] p-6 md:p-8 hover:bg-[#1a1818] transition-colors group">
+    <div className="bg-transparent border-0 border-[#ca1515] rounded-[15px] md:rounded-[20px] p-6 md:p-8 hover:bg-[#cfc8c8]/50 transition-colors group">
+
       <div className="flex flex-col items-center text-center">
-        <div className="w-12 md:w-16 h-12 md:h-16 bg-[#262A2C] rounded-full flex items-center justify-center mb-4 md:mb-6 group-hover:bg-[#2a2e30] transition-colors">
-          <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-white" />
+        <div className="w-12 md:w-16 h-12 md:h-16 rounded-full flex items-center justify-center mb-4 md:mb-6  transition-colors">
+          <IconComponent className="w-6 md:w-16 h-6 md:h-16 text-white" />
         </div>
         <h3 className="text-white text-lg md:text-xl font-semibold mb-3 md:mb-4">{service.title}</h3>
         <p className="text-gray-300 text-sm leading-relaxed">{service.description}</p>

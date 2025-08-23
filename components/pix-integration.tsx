@@ -40,7 +40,7 @@ export function PixIntegration() {
   }
 
   return (
-    <div className="bg-[#151313] rounded-[20px] p-8 hover:bg-[#1a1818] transition-colors group">
+    <div className="border-0 border-[#ca1515] hover:border-l-[#cfc8c8] bg-[#151313] p-8 hover:bg-[#1a1818] transition-colors group">
       <div className="flex flex-col items-center text-center mb-6">
         <div className="w-16 h-16 bg-[#262A2C] rounded-full flex items-center justify-center mb-4 group-hover:bg-[#32BCAD] transition-colors">
           <div className="w-8 h-8 relative">
