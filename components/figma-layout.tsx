@@ -13,30 +13,27 @@ import { PortalEmpresa } from "@/components/portal-empresa"
 import { LoadingScreen } from "@/components/loading-screen"
 import { Github, Zap, Network, Code, Linkedin, ChevronLeft, ChevronRight } from "lucide-react"
 import { ApiIntegrations } from "@/components/api-integrations"
-import automacaoIcon from "@/public/images/automacao.png"
-import devIcon from "@/public/images/programacao-da-web.png"
-import IntegracoesIcon from "@/public/images/computador.png"
 
 const services = [
   {
     title: "Desenvolvimento",
     description: "Sistemas sob medida como ERP’s, sites e controladores, criados para atender às necessidades específicas do seu negócio.",
     icon: (props: any) => (
-      <Image src={devIcon} alt="Desenvolvimento" width={40} height={40} {...props} />
+      <Image src="/images/programacao-da-web.png" alt="Desenvolvimento" width={40} height={40} {...props} />
     )
   },
   {
     title: "Automação",
     description: "Soluções inteligentes que otimizam tarefas e aumentam a eficiência no dia a dia da sua empresa.",
     icon: (props: any) => (
-      <Image src={automacaoIcon} alt="Automação" width={40} height={40} {...props} />
+      <Image src="/images/automacao.png" alt="Desenvolvimento" width={40} height={40} {...props} />
     )
   },
   {
     title: "Integrações",
     description: "Conectamos sistemas, plataformas e APIs para centralizar informações e melhorar seus processos.",
     icon: (props: any) => (
-      <Image src={IntegracoesIcon} alt="Integraçoes" width={40} height={40} {...props} />
+      <Image src="/images/computador.png" alt="Desenvolvimento" width={40} height={40} {...props} />
     )
   }
 ]
