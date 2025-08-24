@@ -10,7 +10,7 @@ export function ApiIntegrations() {
 
   return (
     <div className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto">
-      <h2 className="text-white text-lg md:text-xl font-normal mb-8 md:mb-12 text-center">Integrações com API's</h2>
+      <h2 className="text-2xl md:text-2xl font-bold text-white mb-4 text-center">BLOG MOUND</h2>
 
       {/* Navigation Tabs */}
       <div className="flex justify-center mb-8">

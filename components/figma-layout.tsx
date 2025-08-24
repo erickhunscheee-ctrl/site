@@ -89,7 +89,8 @@ export function FigmaLayout() {
       <div className="absolute top-[400px] md:top-[800px] left-[50px] md:left-[100px] w-[300px] md:w-[1000px] h-[40px] md:h-[80px] bg-[rgba(99,98,97,0.5)] blur-[60px] md:blur-[125px] pointer-events-none"></div>
 
       {/* Header Navigation */}
-      <header className="relative z-10 flex justify-center items-center pt-4 md:pt-8 pb-2 md:pb-4 px-4">
+      <header className="relative z-10 flex justify-center items-center pt-6 md:pt-6 pb-0 md:pb-6 mb-2 px-4">
+
         <nav className="flex items-center gap-4 md:gap-16 text-sm md:text-lg">
           {/* Item Home - sempre visível no mobile */}
           <a
@@ -134,8 +135,8 @@ export function FigmaLayout() {
             <Image
               src="/images/logo.png"
               alt="Logo MOUND"
-              width={60}
-              height={60}
+              width={80}
+              height={80}
               className={`
                 relative z-10 md:w-[100px] md:h-[100px] object-contain
                 transform transition-all duration-500 ease-out
@@ -199,13 +200,14 @@ export function FigmaLayout() {
         </nav>
       </header>
 
-      {/* Hero Section */}
       <section
         id="home"
         ref={homeRef}
-        className="relative z-10 flex items-center justify-center px-4 md:px-16 py-28 md:py-32 max-w-[1920px] mx-auto min-h-[100vh]"
+        className="relative z-10 flex items-center justify-center px-4 md:px-16 py-16 md:py-32 -mt-40 md:mt-0 max-w-[1920px] mx-auto min-h-[100vh]"
         aria-labelledby="hero-title"
       >
+
+
         <div className="absolute top-12 inset-0 flex items-center justify-center">
           <Image
             src="/images/hero-section.png"
@@ -217,7 +219,7 @@ export function FigmaLayout() {
           />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px] -mt-40 md:-mt-72">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-[800px] -mt-60 md:-mt-72">
           <div className="mb-4 md:mb-6">
             <h1 id="hero-title" className="text-white text-lg md:text-3xl font-normal -tracking-wide leading-tight">
               {"Conte-nos sua necessidade."}
@@ -227,41 +229,42 @@ export function FigmaLayout() {
           </div>
 
           <p className="text-white text-sm md:text-xl font-light leading-relaxed mb-6 md:mb-8 max-w-[600px] px-4">
-            somos uma empresa focada em desenvolver soluções personalizadas, para suas necessidades.
+            Somos uma empresa focada em desenvolver soluções personalizadas, para suas necessidades.
           </p>
-
+{/* 
           <div className="flex gap-6 justify-center">
             <button
               onClick={() => scrollTo(demosRef)}
-              className="flex justify-center items-center px-8 md:px-12 py-2 md:py-3 bg-[#ffffff] rounded-[30px] hover:opacity-90 transition"
+              className="border-b-8 border-[#2b0404] flex justify-center items-center px-8 md:px-12 py-2 md:py-3 bg-red-500 rounded-[30px] hover:opacity-90 transition"
               aria-label="Ir para a seção de demonstrações (curiosidade)"
             >
-              <span className="text-[#262A2C] text-xs md:text-sm font-semibold">CURIOSIDADE</span>
+              <span className="text-white text-xs md:text-sm font-bold">DEMONSTRAÇÕES</span>
             </button>
-          </div>
+          </div> */}
         </div>
       </section>
 
       {/* Discover More Section (Chat) */}
       <section
-        className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
+        className="relative z-10 px-4 md:px-16 -mt-40 md:-mt-12 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="descubra-mais-title"
       >
+
         <h2 id="descubra-mais-title" className="text-white text-lg md:text-xl font-normal mb-6 md:mb-8 text-center">
           Descubra mais sobre nós
         </h2>
 
         <div
-          className={`${sectionMax} h-[300px] md:h-[380px] bg-[#151313] rounded-[15px] md:rounded-[20px] relative overflow-hidden`}
+          className={`${sectionMax} h-[500px] md:h-[380px] bg-[#151313] rounded-[15px] md:rounded-[20px] relative overflow-hidden`}
         >
-          <div className="w-full h-[60px] md:h-[88px] bg-[#1C1B1B] rounded-t-[15px] md:rounded-t-[20px] flex items-center px-4 md:px-6">
+          <div className="w-full h-[60px] md:h-[48px] bg-red-500 rounded-t-[15px] md:rounded-t-[20px] flex items-center px-4 md:px-6">
             <div className="flex items-center gap-2 md:gap-3">
-              <div className="w-2 md:w-3 h-2 md:h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 md:w-3 h-2 md:h-3 bg-white rounded-full"></div>
               <span className="text-white text-xs md:text-sm font-medium">MOUND Assistente</span>
-              <span className="text-green-400 text-xs hidden sm:block">Conectado via GROQ</span>
+              <span className="text-white text-xs hidden sm:block">Conectado via GROQ</span>
             </div>
           </div>
-          <div className="p-3 md:p-6 h-[calc(300px-60px)] md:h-[calc(380px-88px)] overflow-hidden">
+          <div className="p-3 md:p-6 h-[calc(300px-(-100px))] md:h-[calc(380px-46px)] overflow-hidden">
             <MoundChat />
           </div>
         </div>
@@ -278,7 +281,7 @@ export function FigmaLayout() {
         aria-labelledby="servicos-title"
       >
         <h2 id="servicos-title" className="text-white text-lg md:text-2xl font-bold mb-8 md:mb-12 text-center">
-           SERVIÇOS MOUND
+          SERVIÇOS MOUND
         </h2>
 
         <div className={`${sectionMax}`}>
@@ -419,7 +422,7 @@ export function FigmaLayout() {
       <ApiIntegrations />
 
       {/* Faixa de integrações (logos) */}
-      <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">
+      {/* <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">
         <h2 className="text-white text-sm font-normal mb-8 text-center">Nossas integrações</h2>
 
         <div
@@ -438,7 +441,7 @@ export function FigmaLayout() {
             <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">n8n</span>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="relative z-10 w-full h-[200] bg-[#08090A] flex items-center justify-center">
@@ -450,7 +453,7 @@ export function FigmaLayout() {
 
 // Service Card
 function ServiceCard({ service }: { service: any }) {
-  
+
   const IconComponent = service.icon
   return (
     <div className="bg-transparent border-0 border-[#ca1515] rounded-[15px] md:rounded-[20px] p-6 md:p-8 hover:bg-[#cfc8c8]/50 transition-colors group">

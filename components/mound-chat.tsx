@@ -120,12 +120,12 @@ export function MoundChat() {
               {message.role === "user" ? (
                 <User className="w-4 h-4 text-white" />
               ) : (
-                <Bot className="w-4 h-4 text-yellow-500" />
+                <Bot className="w-4 h-4 text-red-500" />
               )}
             </div>
             <div
               className={`max-w-[80%] p-3 rounded-lg ${
-                message.role === "user" ? "bg-yellow-500 text-black" : "bg-[#262A2C] text-white"
+                message.role === "user" ? "bg-white/70 text-black" : "bg-[#262A2C] text-white"
               }`}
             >
               <p className="text-sm leading-relaxed">{message.content}</p>
@@ -142,7 +142,7 @@ export function MoundChat() {
         {isLoading && (
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-full bg-[#262A2C] flex items-center justify-center">
-              <Bot className="w-4 h-4 text-yellow-500" />
+              <Bot className="w-4 h-4 text-red-500" />
             </div>
             <div className="bg-[#262A2C] text-white p-3 rounded-lg">
               <div className="flex space-x-1">
@@ -183,13 +183,13 @@ export function MoundChat() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Digite sua mensagem sobre a MOUND..."
-          className="flex-1 px-4 py-2 bg-[#262A2C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-colors text-sm"
+          className="flex-1 px-4 py-2 bg-[#262A2C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-colors text-sm"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="px-4 py-2 bg-yellow-500 text-black rounded-lg hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <Send className="w-4 h-4" />
         </button>

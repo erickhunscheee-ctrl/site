@@ -9,8 +9,8 @@ export function LearnMoreSection() {
       className="relative z-10 px-4 md:px-16 py-8 md:py-16 max-w-[1920px] mx-auto"
       aria-labelledby="sobre-nos-title"
     >
-      <h2 id="sobre-nos-title" className="text-white text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center">
-        Sobre nós
+      <h2 id="sobre-nos-title" className="text-2xl md:text-2xl font-bold text-white mb-4 text-center">
+        SOBRE A MOUND
       </h2>
 
       <div className="max-w-[1000px] mx-auto">

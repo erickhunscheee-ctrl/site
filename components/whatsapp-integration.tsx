@@ -35,7 +35,7 @@ export function WhatsAppIntegration() {
   return (
     <div className="border-l-4 border-[#ca1515] hover:border-l-[#cfc8c8] bg-[#151313] rounded-s-[20px] p-8 hover:bg-[#1a1818] transition-colors group">
       <div className="flex flex-col items-center text-center mb-6">
-        <div className=" flex items-center justify-center mb-4 transition-colors">
+        <div className=" flex items-center  bg-[#262A2C] rounded-full justify-center mb-4 transition-colors">
           <div className="w-16 h-16 relative">
             <svg viewBox="0 0 508 508" className="w-full h-full">
               <path
