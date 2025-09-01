@@ -77,7 +77,7 @@ export function PortalEmpresa() {
     <section className="py-20 px-4 ">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-2xl font-bold text-white mb-4">ACESSO AO PROJETO</h2>
+          <h2 className="text-2xl md:text-2xl font-bold text-white mb-4">Acesso aos Projetos e Programas</h2>
           <p className="text-gray-400 text-lg">Tenha acesso a documentação e andamento dos projetos</p>
         </div>
 

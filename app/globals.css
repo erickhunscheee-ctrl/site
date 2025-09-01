@@ -78,6 +78,333 @@
 
 }
 
+/* Adicione este CSS ao seu arquivo de estilos globais ou componente */
+
+@keyframes arrowFloat {
+
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+
+  25% {
+    transform: translateX(4px) translateY(-2px);
+  }
+
+  50% {
+    transform: translateX(8px) translateY(0);
+  }
+
+  75% {
+    transform: translateX(4px) translateY(2px);
+  }
+}
+
+@keyframes float1 {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 1;
+  }
+}
+
+@keyframes float2 {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(-15px) translateX(-5px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float3 {
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(-25px) translateX(-8px);
+    opacity: 0.9;
+  }
+}
+
+/* Responsivo para mobile */
+@media (max-width: 1023px) {
+  @keyframes arrowFloat {
+
+    0%,
+    100% {
+      transform: rotate(90deg) translateX(0) translateY(0);
+    }
+
+    25% {
+      transform: rotate(90deg) translateX(4px) translateY(-2px);
+    }
+
+    50% {
+      transform: rotate(90deg) translateX(8px) translateY(0);
+    }
+
+    75% {
+      transform: rotate(90deg) translateX(4px) translateY(2px);
+    }
+  }
+}
+
+/* Efeitos adicionais para hover */
+.chat-arrow-container:hover .arrow-main {
+  animation-duration: 1s;
+  transform: scale(1.1);
+}
+
+.chat-arrow-container:hover .pulse-bg {
+  animation-duration: 1s;
+}
+
+.mano-robo {
+  position: absolute;
+  bottom: -580px;
+  /* ajusta para subir ou descer */
+  left: 30%;
+  /* centraliza horizontalmente */
+  transform: translateX(-50%) rotate(-20deg);
+  /* ajusta inclinação */
+  width: 800px;
+  /* tamanho ajustável */
+  z-index: -2;
+  /* fica acima do fundo */
+  pointer-events: none;
+  /* evita bloquear cliques no chat */
+  width: 1000px;
+}
+
+.div-cards {
+  background-color: #44273e;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding-left: 128px;
+  padding-right: 128px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  position: relative;
+  margin-top: 128px;
+  z-index: 0;
+  height: 400px;
+  overflow: visible;
+  /* Permite que elementos filhos saiam para fora */
+}
+
+.div-cards .content {
+  max-width: 512px;
+  margin-left: 280px;
+  color: white;
+  position: relative;
+  z-index: 10;
+}
+
+.div-cards .content h3 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+
+}
+
+.div-cards .content p {
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.div-cards .content button {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid white;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.div-cards .content button:hover {
+  background-color: white;
+  color: #075985;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #28b90a;
+  margin-bottom: 2rem;
+  text-align: left;
+  text-transform: uppercase;
+  max-width: 600px;
+  margin-left: 25%;
+  margin-right: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.button-container button {
+  padding: 0.5rem 1rem;
+  background: #075985;
+  color: white;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+
+.h2-demonstracoes {
+  font-size: 20px;
+  font-weight: 400;
+  color: #075985;
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 500px;
+  margin-left: 25%;
+  margin-right: auto;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 12px;
+  margin-left: 25%;
+  /* ~16px */
+  font-weight: 300;
+  /* fino */
+  color: #d1d5db;
+  /* cinza claro */
+  line-height: 1.6;
+  /* espaço entre linhas */
+  margin-bottom: 1rem;
+}
+
+.texto-card {
+  font-size: 14px;
+  font-weight: 300;
+  color: #d1d5db;
+  /* cinza claro */
+  line-height: 1.6;
+
+  max-width: 600px;
+  /* controla largura */
+  margin-left: 0%;
+  /* empurra da esquerda */
+}
+
+.texto-card2 {
+  font-size: 14px;
+  font-weight: 300;
+  color: #d1d5db;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: 30%;
+
+}
+
+.img-services {
+  position: absolute;
+  z-index: 20;
+  border-radius: 16px;
+  right: 320px;
+  transform: translateY(-245px);
+  /* Move 50px para cima - ajuste o valor */
+  max-width: none;
+  pointer-events: none;
+}
+
+
+.img-services-2 {
+  position: absolute;
+  z-index: 20;
+  border-radius: 16px;
+  left: 320px;
+  transform: translateY(-230px);
+  /* Move 50px para cima - ajuste o valor */
+  max-width: none;
+  pointer-events: none;
+}
+
+.h2-2 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #28b90a;
+  margin-left: 55%;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+
+}
+
+.text-2 {
+  font-size: 12px;
+  margin-left: 55%;
+  /* ~16px */
+  font-weight: 300;
+  /* fino */
+  color: #d1d5db;
+  /* cinza claro */
+  line-height: 1.6;
+  /* espaço entre linhas */
+  margin-bottom: 1rem;
+
+}
+
+.img-services-invert {
+  position: absolute;
+  z-index: 20;
+  border-radius: 16px;
+  right: 320px;
+  transform: translateY(-230px);
+  /* Move 50px para cima - ajuste o valor */
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Classe para imagem que vai sobrepor e sair da div */
+.div-cards .overlay-image {
+  position: absolute;
+  z-index: 20;
+  /* Maior que o z-index do conteúdo para ficar por cima */
+  top: 100px;
+  /* Ajuste conforme necessário */
+  border-radius: 16px;
+  right: 280px;
+  /* Ajuste conforme necessário */
+  max-width: none;
+  /* Remove limitação de largura */
+  pointer-events: none;
+  /* Opcional: impede interação com a imagem */
+}
+
+/* Variação para imagem que pode ser clicável */
+.div-cards .overlay-image.clickable {
+  pointer-events: auto;
+}
+
+/* Container da div-cards deve permitir overflow */
+.div-cards-container {
+  position: relative;
+  overflow: visible;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

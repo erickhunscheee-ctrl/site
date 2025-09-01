@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import { Send, Bot, User } from "lucide-react"
+import { Send, Bot, User, Phone, Video, MoreVertical } from "lucide-react"
 
 interface Message {
   id: string
@@ -108,92 +108,167 @@ export function MoundChat() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex items-start gap-3 ${message.role === "user" ? "flex-row-reverse" : ""}`}
-          >
-            <div className="w-8 h-8 rounded-full bg-[#262A2C] flex items-center justify-center flex-shrink-0">
-              {message.role === "user" ? (
-                <User className="w-4 h-4 text-white" />
-              ) : (
-                <Bot className="w-4 h-4 text-red-500" />
-              )}
-            </div>
-            <div
-              className={`max-w-[80%] p-3 rounded-lg ${
-                message.role === "user" ? "bg-white/70 text-black" : "bg-[#262A2C] text-white"
-              }`}
-            >
-              <p className="text-sm leading-relaxed">{message.content}</p>
-              <span className="text-xs opacity-70 mt-1 block">
-                {message.timestamp.toLocaleTimeString("pt-BR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
-            </div>
+    <div className="absolute inset-0 bg-repeat bg-center rounded-lg flex flex-col h-full bg-white">
+      {/* WhatsApp Header */}
+      <div className="bg-green-600 px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+            <Bot className="w-6 h-6 text-green-600" />
           </div>
-        ))}
+          <div>
+            <h3 className="text-white font-medium text-sm">MOUND Assistente</h3>
+            <p className="text-green-100 text-xs">online</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <Video className="w-5 h-5 text-white cursor-pointer" />
+          <Phone className="w-5 h-5 text-white cursor-pointer" />
+          <MoreVertical className="w-5 h-5 text-white cursor-pointer" />
+        </div>
+      </div>
 
-        {isLoading && (
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#262A2C] flex items-center justify-center">
-              <Bot className="w-4 h-4 text-red-500" />
-            </div>
-            <div className="bg-[#262A2C] text-white p-3 rounded-lg">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+      {/* WhatsApp Chat Background */}
+      <div className="flex-1 overflow-y-auto px-4 py-2 bg-black  relative">
+        {/* WhatsApp pattern background */}
+        <div
+          className="absolute inset-0 bg-repeat bg-center"
+          style={{
+            backgroundImage: "url('/images/background-whats.png')",
+            opacity: 0.1, // 20% de opacidade
+          }}
+        ></div>
+
+        <div className="relative space-y-2">
+          {messages.map((message, index) => (
+            <div
+              key={message.id}
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-2`}
+            >
+              <div
+                className={`relative max-w-xs lg:max-w-md px-4 py-2 rounded-lg shadow-sm ${message.role === "user"
+                  ? "bg-green-500 text-white rounded-br-sm"
+                  : "bg-white text-gray-800 rounded-bl-sm border"
+                  }`}
+                style={{
+                  boxShadow: message.role === "user"
+                    ? "0 1px 0.5px rgba(0,0,0,0.13)"
+                    : "0 1px 0.5px rgba(0,0,0,0.13)"
+                }}
+              >
+                <div className="text-sm leading-5 whitespace-pre-wrap break-words">
+                  {message.content}
+                </div>
+
+                <div className={`flex items-center justify-end mt-1 gap-1 ${message.role === "user" ? "text-green-100" : "text-gray-500"
+                  }`}>
+                  <span className="text-xs">
+                    {message.timestamp.toLocaleTimeString("pt-BR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                  {message.role === "user" && (
+                    <svg className="w-4 h-3 fill-current" viewBox="0 0 16 15">
+                      <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.063-.51zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l3.61 3.463c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" />
+                    </svg>
+                  )}
+                </div>
+
+                {/* WhatsApp message tail */}
                 <div
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style={{ animationDelay: "0.1s" }}
-                ></div>
-                <div
-                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style={{ animationDelay: "0.2s" }}
+                  className={`absolute top-0 w-0 h-0 ${message.role === "user"
+                    ? "right-0 transform translate-x-1 border-l-8 border-l-green-500 border-t-8 border-t-transparent"
+                    : "left-0 transform -translate-x-1 border-r-8 border-r-white border-t-8 border-t-transparent"
+                    }`}
                 ></div>
               </div>
             </div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
+          ))}
+
+          {isLoading && (
+            <div className="flex justify-start mb-2">
+              <div className="relative max-w-xs bg-white text-gray-800 px-4 py-3 rounded-lg rounded-bl-sm border shadow-sm">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.1s" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.2s" }}
+                  ></div>
+                </div>
+                <div className="absolute top-0 left-0 transform -translate-x-1 w-0 h-0 border-r-8 border-r-white border-t-8 border-t-transparent"></div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
       {/* Quick Response Buttons */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {["Quem somos", "Projetos", "Serviços"].map((response) => (
-          <button
-            key={response}
-            onClick={() => handleQuickResponse(response)}
-            className="px-3 py-1 text-xs bg-[#262A2C] text-white rounded-full hover:bg-[#2a2e30] transition-colors"
-            disabled={isLoading}
-          >
-            {response}
-          </button>
-        ))}
+      <div className="px-4 py-2 bg-white">
+        <div className="flex flex-wrap gap-2">
+          {["Quem somos", "Projetos", "Serviços"].map((response) => (
+            <button
+              key={response}
+              onClick={() => handleQuickResponse(response)}
+              className="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50 border border-gray-300"
+              disabled={isLoading}
+            >
+              {response}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Input Form */}
-      <form onSubmit={handleSubmit} className="flex gap-2">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Digite sua mensagem sobre a MOUND..."
-          className="flex-1 px-4 py-2 bg-[#262A2C] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-red-500 transition-colors text-sm"
-          disabled={isLoading}
-        />
-        <button
-          type="submit"
-          disabled={isLoading || !input.trim()}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          <Send className="w-4 h-4" />
-        </button>
-      </form>
+      {/* WhatsApp Input Bar */}
+      <div className="bg-gray-50 px-4 py-3 border-t border-gray-200">
+        <div className="flex items-center gap-3">
+          {/* Emoji button */}
+          <button className="text-gray-500 hover:text-gray-700">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+          </button>
+
+          {/* Input field */}
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault()
+                  handleSubmit(e)
+                }
+              }}
+              placeholder="Escreva uma mensagem"
+              className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-full text-gray-800 placeholder-gray-500 focus:outline-none focus:border-green-500 text-sm"
+              disabled={isLoading}
+            />
+          </div>
+
+          {/* Send/Mic button */}
+          {input.trim() ? (
+            <button
+              onClick={handleSubmit}
+              disabled={isLoading || !input.trim()}
+              className="w-10 h-10 bg-green-500 text-white rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+            >
+              <Send className="w-5 h-5" />
+            </button>
+          ) : (
+            <button className="w-10 h-10 text-gray-500 rounded-full hover:text-gray-700 flex items-center justify-center">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z" />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
