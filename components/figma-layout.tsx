@@ -239,7 +239,7 @@ export function FigmaLayout() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-lg">
+              <p className="text-header">
                 Conte-nos sua necessidade. Afinal, que sentido há em um mundo sem desafios?
                 Somos uma empresa focada em desenvolver soluções personalizadas para suas necessidades.
               </p>
@@ -328,7 +328,7 @@ export function FigmaLayout() {
                 <h3 className="text-white text-xl font-bold">
                   Chat controlado por IA.
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-session-2">
                   Nosso assistente utiliza inteligência artificial de última geração para oferecer respostas precisas e personalizadas, além de trabalhar com contexto assim mantendo um padrão de respostas.
                 </p>
                 <button
@@ -391,42 +391,29 @@ export function FigmaLayout() {
       </div>
 
       <div className="py-40">
-        <p>
+        <h2 className="h2-3">
           Automação de Software
-        </p>
-        <h2>
-          Reduza custos, elimine tarefas repetitivas <br />
-          e aumente a produtividade da sua equipe <br />
-          com soluções inteligentes de automação.
         </h2>
         <p>
           Desenvolvemos rotinas sob medida que otimizam <br />
           processos e integram sistemas já existentes <br />
           para trazer mais agilidade ao seu negócio.
         </p>
-        <p>
-          Descubra como podemos transformar seus fluxos:
-        </p>
+        <button className="button-cards2">Saiba mais</button>
         <img src="images/800.jpg" width={600} height={200} alt="Automação de Software" className="img-services" />
       </div>
 
       <div className="py-12">
-        <p className="text-2">
-          Desenvolvimento de Software
-        </p>
+
         <h2 className="h2-2">
-          Criamos sistemas sob medida que acompanham <br />
-          a evolução do seu negócio, com foco em <br />
-          usabilidade, escalabilidade e inovação.
+          Desenvolvimento de Software
         </h2>
-        <p className="text-2">
+        <p className="p-2">
           Seja para web, desktop ou mobile, <br />
           entregamos soluções robustas que se moldam <br />
           às necessidades da sua empresa.
         </p>
-        <p className="text-2">
-          Conheça nossos projetos:
-        </p>
+        <button className="button-cards">Saiba mais</button>
         <img src="images/900.jpg" width={600} height={200} alt="Desenvolvimento de Software" className="img-services-2" />
       </div>
 
@@ -453,6 +440,7 @@ export function FigmaLayout() {
         className="relative z-10 px-4 md:px-12 py-8 md:py-16 max-w-[1920px] mx-auto"
         aria-labelledby="integracoes-title"
       >
+        <div className="py-14"></div>
         <p>
           São apenas demonstrações prototipadas.
         </p>
@@ -467,7 +455,7 @@ export function FigmaLayout() {
         <div className="button-container">
           <button
             onClick={() => {
-              alert ("Sessão em desenvolvimento :)");
+              alert("Sessão em desenvolvimento :)");
               // const demonst = document.getElementById("demonstracoes");
               // if (demonst) {
               //   if (demonst.classList.contains("hidden")) {
@@ -484,7 +472,7 @@ export function FigmaLayout() {
         </div>
 
         <div id="demonstracoes" className={`${sectionMax} hidden`}>
-        
+
           {/* Desktop: exatamente como antes (3 cards) */}
           <div className="hidden md:grid md:grid-cols-3 gap-8">
             <WhatsAppIntegration />
@@ -535,10 +523,52 @@ export function FigmaLayout() {
       </section>
 
       <section ref={portalRef}>
-        <div className="py-24">
-        </div>
         <PortalEmpresa />
       </section>
+      <section className="secao-segmentos">
+        <div className="segmentos-texto">
+          <h4>Segmentos</h4>
+          <h2>Presentes nos mercados</h2>
+          <p>
+            Com soluções integradas e personalizadas, acompanhamos sua evolução em direção ao Futuro,
+            impulsionando a produtividade e eficiência do seu negócio, enquanto reduzimos custos e tempo
+            de produção, resultando em maior competitividade.
+          </p>
+        </div>
+
+        <div className="segmentos-cards">
+          <div className="card-segmento">
+            <i className="fas fa-tractor"></i>
+            <h3>Agronegócio</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-utensils"></i>
+            <h3>Alimentos e bebidas</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-box"></i>
+            <h3>Bens de consumo</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-project-diagram"></i>
+            <h3>Bens Intermediários</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-pills"></i>
+            <h3>Farmacêutica</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-cogs"></i>
+            <h3>Metalmecânica</h3>
+          </div>
+          <div className="card-segmento">
+            <i className="fas fa-store"></i>
+            <h3>Varejo</h3>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* Desenvolvedores (sem fundo nos cards) */}
       {/* <section
@@ -561,16 +591,16 @@ export function FigmaLayout() {
         </div>
       </section> */}
 
-      {/* Sobre nós (logo após desenvolvedores) */}
+      {/* Sobre nós (logo após desenvolvedores)
       <div ref={sobreRef}>
         <LearnMoreSection />
-      </div>
+      </div> */}
 
       {/* <section ref={avaliacoesRef}>
         <AvaliacoesSection />
       </section> */}
 
-      <ApiIntegrations />
+      {/* <ApiIntegrations /> */}
 
       {/* Faixa de integrações (logos) */}
       {/* <section className="relative z-10 px-16 pt-16 pb-0 max-w-[1920px] mx-auto">

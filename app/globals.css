@@ -268,13 +268,42 @@ h2 {
   color: white;
   border-radius: 24px;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* shadow-lg */
+  transition: all 0.3s ease;
+  /* transition-all duration-300 */
 }
 
+.button-container button:hover {
+  padding: 0.5rem 1rem;
+  background: #dc2626;
+  color: white;
+  border-radius: 24px;
+  cursor: pointer;
+  /* mantém o vermelho no hover */
+  transform: scale(1.05);
+  /* hover:scale-105 */
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  /* hover:shadow-2xl */
+}
 
-.h2-demonstracoes {
+.text-header {
   font-size: 20px;
   font-weight: 400;
-  color: #075985;
+  text-align: left;
+  margin-left: 0;
+}
+
+.text-session-2 {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 0;
+}
+
+.h2-demonstracoes {
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
   margin-bottom: 2rem;
   text-align: left;
   max-width: 500px;
@@ -284,7 +313,7 @@ h2 {
 }
 
 p {
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 25%;
   /* ~16px */
   font-weight: 300;
@@ -294,6 +323,59 @@ p {
   line-height: 1.6;
   /* espaço entre linhas */
   margin-bottom: 1rem;
+}
+
+.p-2 {
+  font-size: 14px;
+  margin-left: 54.7%;
+  /* ~16px */
+  font-weight: 300;
+  /* fino */
+  color: #d1d5db;
+  /* cinza claro */
+  line-height: 1.6;
+  /* espaço entre linhas */
+  margin-bottom: 1rem;
+}
+
+.button-cards {
+  padding: 0.5rem 1rem;
+  margin-left: 54.7%;
+  color: white;
+  border: 1px solid #44273e;
+  /* borda vermelha */
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.button-cards:hover {
+  background: #44273e;
+  /* vermelho mais escuro no hover */
+  /* aumenta levemente */
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  /* sombra maior */
+}
+
+.button-cards2 {
+  padding: 0.5rem 1rem;
+  margin-left: 24.6%;
+  color: white;
+  border: 1px solid #44273e;
+  /* borda vermelha */
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.button-cards2:hover {
+  background: #44273e;
+  /* vermelho mais escuro no hover */
+  /* aumenta levemente */
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  /* sombra maior */
 }
 
 .texto-card {
@@ -343,15 +425,142 @@ p {
 }
 
 .h2-2 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #28b90a;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
   margin-left: 55%;
-  font-weight: 300;
   line-height: 1.6;
   margin-bottom: 1rem;
+  text-transform: none !important;
 
 }
+
+.texto-portal {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-transform: none !important;
+  text-align: center;
+  /* centraliza o texto */
+}
+
+.texto-portal-pequeno {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-transform: none !important;
+  margin-left: 10%;
+  /* centraliza o texto */
+}
+
+/* Container geral da seção */
+.secao-segmentos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 4rem 8%;
+  background-color: #021118;
+  /* azul escuro de fundo */
+  color: #ffffff;
+  gap: 3rem;
+}
+
+/* Coluna de texto */
+.segmentos-texto {
+  flex: 1;
+  max-width: 40%;
+}
+
+.segmentos-texto h4 {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-left: 25%;
+  margin-bottom: 0.5rem;
+  color: #9ecae6;
+}
+
+.segmentos-texto h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.segmentos-texto p {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: #e0e0e0;
+}
+
+/* Coluna dos cards */
+.segmentos-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Cada card */
+.card-segmento {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card-segmento:hover {
+  border-color: #00c2ff;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-5px);
+}
+
+.card-segmento i {
+  font-size: 32px;
+  color: #00c2ff;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.card-segmento h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .secao-segmentos {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .segmentos-texto {
+    max-width: 100%;
+  }
+}
+
+
+.h2-3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-align: left;
+  max-width: 600px;
+  margin-left: 25%;
+  margin-right: auto;
+  margin-top: 60px;
+  text-transform: none !important;
+}
+
 
 .text-2 {
   font-size: 12px;

@@ -77,11 +77,11 @@ export function PortalEmpresa() {
     <section className="py-20 px-4 ">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-2xl font-bold text-white mb-4">Acesso aos Projetos e Programas</h2>
-          <p className="text-gray-400 text-lg">Tenha acesso a documentação e andamento dos projetos</p>
+          <h2 className="texto-portal">Acesso aos Projetos e Programas</h2>
+          <p className="texto-portal-pequeno">Tenha acesso a documentação e andamento dos projetos</p>
         </div>
 
-        <Card className="bg-[#151313] border-0 border-l-4 border-[#ca1515] rounded-l-[20px] rounded-r-none md:rounded-r-none p-6 md:p-8 hover:border-l-[#cfc8c8] transition-colors group">
+        <Card className="bg-black border-0 border-l-4 border-[#ca1515] rounded-l-[20px] rounded-r-none md:rounded-r-none p-6 md:p-8 hover:border-l-[#cfc8c8] transition-colors group">
           <CardHeader>
             <CardTitle className="text-sm text-white">ACESSO VIA TOCKEN</CardTitle>
           </CardHeader>
